@@ -6,6 +6,7 @@ import UserList from "../components/UserList.jsx";
 function Dashboard() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     getUsers().then((data) => {
@@ -18,10 +19,20 @@ function Dashboard() {
     return <h2>Loading Users...</h2>;
   }
 
+  const filteredUsers = users.filter((user) =>
+    user.name.toLowerCase().includes(search.toLowerCase()),
+  );
+
   return (
     <div>
       <h1>Admin Dashboard</h1>
-      <UserList users={users} />
+      <input
+        type="text"
+        placeholder="Search User..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+      <UserList users={filteredUsers} />
     </div>
   );
 }
