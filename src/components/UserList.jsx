@@ -1,15 +1,17 @@
-function UserList({ users }) {
+function UserList({ users, onSelectUser }) {
   return (
-    <div>
+    <ul>
       {users.map((user) => (
-        <div key={user.id}>
-          <p>{user.name}</p>
-          <p>{user.email}</p>
-        </div>
+        <li
+          key={user.id}
+          onClick={() => onSelectUser(user)}
+          style={{ cursor: "pointer" }}
+        >
+          {user.name}
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 
 export default UserList;
-

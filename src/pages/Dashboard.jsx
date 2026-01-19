@@ -7,6 +7,7 @@ function Dashboard() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
     getUsers().then((data) => {
@@ -32,7 +33,19 @@ function Dashboard() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <UserList users={filteredUsers} />
+      <hr />
+
+      <UserList users={filteredUsers} onSelectUser={setSelectedUser} />
+      <hr />
+
+      {selectedUser && (
+        <div>
+          <h3>User Detail</h3>
+          <p>Name: {selectedUser.name}</p>
+          <p>Email: {selectedUser.email}</p>
+          <p>Phone: {selectedUser.phone}</p>
+        </div>
+      )}
     </div>
   );
 }
