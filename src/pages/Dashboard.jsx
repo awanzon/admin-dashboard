@@ -1,6 +1,7 @@
 import { getUsers } from "../services/api.js";
 import { useEffect } from "react";
 import { useState } from "react";
+import UserList from "../components/UserList.jsx";
 
 function Dashboard() {
   const [users, setUsers] = useState([]);
@@ -17,7 +18,12 @@ function Dashboard() {
     return <h2>Loading Users...</h2>;
   }
 
-  return <h1>Admin Dashboard</h1>;
+  return (
+    <div>
+      <h1>Admin Dashboard</h1>
+      <UserList users={users} />
+    </div>
+  );
 }
 
 export default Dashboard;
