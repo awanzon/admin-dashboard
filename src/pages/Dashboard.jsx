@@ -1,16 +1,23 @@
 import { getUsers } from "../services/api.js";
 import { useEffect } from "react";
+import { useState } from "react";
 
 function Dashboard() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    console.log("Dashboard mounted");
-    
     getUsers().then((data) => {
-      console.log(data);
+      setUsers(data);
+      setLoading(false);
     });
   }, []);
 
-  return <h1>Admin Dashboard</h1>
+  if (loading) {
+    return <h2>Loading Users...</h2>;
+  }
+
+  return <h1>Admin Dashboard</h1>;
 }
 
 export default Dashboard;
