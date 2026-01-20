@@ -2,6 +2,7 @@ import { getUsers } from "../services/api.js";
 import { useEffect } from "react";
 import { useState } from "react";
 import UserList from "../components/UserList.jsx";
+import UserDetail from "../components/UserDetail.jsx";
 
 function Dashboard() {
   const [users, setUsers] = useState([]);
@@ -15,6 +16,14 @@ function Dashboard() {
       setLoading(false);
     });
   }, []);
+
+  function openModal(user) {
+    setSelectedUser(user);
+  }
+
+  function closeModal() {
+    setSelectedUser(null);
+  }
 
   if (loading) {
     return <h2>Loading Users...</h2>;
@@ -35,17 +44,10 @@ function Dashboard() {
       />
       <hr />
 
-      <UserList users={filteredUsers} onSelectUser={setSelectedUser} />
+      <UserList users={filteredUsers} onViewUser={openModal} />
       <hr />
 
-      {selectedUser && (
-        <div>
-          <h3>User Detail</h3>
-          <p>Name: {selectedUser.name}</p>
-          <p>Email: {selectedUser.email}</p>
-          <p>Phone: {selectedUser.phone}</p>
-        </div>
-      )}
+      {selectedUser && <UserDetail user={selectedUser} onClose={closeModal} />}
     </div>
   );
 }

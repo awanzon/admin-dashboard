@@ -1,17 +1,14 @@
-import './App.css'
-import Dashboard from './pages/Dashboard'
+// import './App.css'
+import UserDetail from "./components/UserDetail";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
-  
-
   return (
     <>
-    <div>
       <Dashboard />
-    </div>
-      
+      {/* <UserDetail /> */}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
