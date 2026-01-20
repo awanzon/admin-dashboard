@@ -1,4 +1,4 @@
-import { getUsers } from "../services/api.js";
+import { getUsers } from "../api/users.js";
 import { useEffect } from "react";
 import { useState } from "react";
 import UserList from "../components/UserList.jsx";

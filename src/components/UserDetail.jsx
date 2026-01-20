@@ -24,14 +24,14 @@ const overlayStyle = {
   left: 0,
   width: "100vw",
   height: "100vh",
-  background: "rgba(37, 8, 41, 0.5)",
+  background: "rgba(19, 56, 71, 0.5)",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
 };
 
 const modalStyle = {
-  background: "#fff",
+  background: "#ffffff",
   padding: "20px",
   borderRadius: "8px",
   width: "300px",
