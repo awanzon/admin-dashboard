@@ -1,16 +1,114 @@
-# React + Vite
+// Admin Dashboard – User Management
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+// 📌 Overview
 
-Currently, two official plugins are available:
+This project simulates an **internal admin dashboard** used by support or operations teams to manage user data. The focus is on **real-world frontend workflows**, including data fetching, UI state handling, and reusable component structure.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The project is built as part of my journey to become a **job-ready junior frontend developer**, following patterns commonly used in startups and production React applications.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+// 🎯 Project Goals
 
-## Expanding the ESLint configuration
+* Practice real-world frontend architecture
+* Separate UI logic from data-fetching logic
+* Implement common admin features used in actual products
+* Write clean, readable, and maintainable React code
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+// ✨ Features
+
+ ✅ Implemented
+
+- **User List** – Display users fetched from API
+- **Search** – Search users by name
+- **User Detail Modal** – View user details in a popup/modal
+- **Loading State** – Show loading indicator while fetching data
+
+ 🚧 In Progress
+
+- **Error Handling** – Graceful UI for API errors and failed requests
+
+ 📝 Planned
+
+- **Filter** – Filter users based on conditions
+- **UseCard.jsx** - set this file 
+- **MockUsers.js** - set this file 
+
+---
+
+// 🛠 Tech Stack
+
+* React
+* Vite
+* JavaScript (ES6+)
+* Axios (API handling)
+* CSS / Tailwind (UI styling)
+* Git & GitHub
+
+-------
+
+// 📁 Project Structure
+
+```
+src/
+ |--api/
+ │   > users.js        # Axios API layer
+ |--components/
+ │   > UserList.jsx    # List & Detail button
+ │   > UserCard.jsx    # 
+ │   > UserDetail.jsx  # Modal (popup View detail Users)
+ |--pages/
+ │   > Dashboard.jsx   # Parent here
+ |--mocks/
+ │   > MockUsers.js    # Mock data (development)
+```
+
+---
+
+ 🧠 Key Concepts Demonstrated
+
+* Separation of concerns (API layer vs UI)
+* Conditional rendering
+* Reusable React components
+* Controlled state with `useState`
+* Side effects with `useEffect`
+* Clean commit history using conventional commits
+
+---
+
+// 🚀 Getting Started
+
+```bash
+npm install
+npm run dev
+```
+
+---
+
+// 📌 Notes
+
+* This project focuses on **frontend logic and UI behavior**.
+* Backend is simulated using a public API / mock data.
+* Styling is intentionally kept simple to prioritize functionality and structure.
+
+---
+
+// 📈 Future Improvements
+
+* Add pagination
+* Add retry button on API error
+* Improve accessibility
+* Add unit tests
+
+---
+
+// 👤 Author
+
+**Awan(Sidiq Hikmawan)**
+Junior Frontend Developer
+
+---
+
+> This project is intended for portfolio purposes.
