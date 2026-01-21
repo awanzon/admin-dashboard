@@ -9,12 +9,21 @@ function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    getUsers().then((data) => {
-      setUsers(data);
-      setLoading(false);
-    });
+    getUsers()
+      .then((data) => {
+        setUsers(data);
+        setError(null);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError("Failed to load users");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   function openModal(user) {
@@ -27,6 +36,10 @@ function Dashboard() {
 
   if (loading) {
     return <h2>Loading Users...</h2>;
+  }
+  
+  if (error) {
+    return <h2 style={{ color: "red" }}>{error}</h2>;
   }
 
   const filteredUsers = users.filter((user) =>

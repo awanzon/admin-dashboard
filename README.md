@@ -25,14 +25,15 @@ The project is built as part of my journey to become a **job-ready junior fronte
 - **Search** – Search users by name
 - **User Detail Modal** – View user details in a popup/modal
 - **Loading State** – Show loading indicator while fetching data
+- **Error Handling** – Graceful UI for API errors and failed requests
 
  🚧 In Progress
 
-- **Error Handling** – Graceful UI for API errors and failed requests
+- **Filter** – Filter users based on conditions
 
  📝 Planned
 
-- **Filter** – Filter users based on conditions
+
 - **UseCard.jsx** - set this file 
 - **MockUsers.js** - set this file 
 
