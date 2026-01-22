@@ -35,8 +35,6 @@ The project is built as part of my journey to become a **job-ready junior fronte
 
  📝 Planned
 
-
-
 - **UseCard.jsx** - set this file 
 - **MockUsers.js** - Create Mock Api 
 

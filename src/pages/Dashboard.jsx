@@ -5,27 +5,17 @@ import UserDetail from "../components/UserDetail.jsx";
 import Loading from "../components/Loading.jsx";
 
 function Dashboard() {
-  const { users, loading, error } = useUsers();
-  // const [users, setUsers] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState("");
-  const [selectedUser, setSelectedUser] = useState(null);
-  // const [error, setError] = useState(null);
-
-  // useEffect(() => {
-  //   getUsers()
-  //     .then((data) => {
-  //       setUsers(data);
-  //       setError(null);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //       setError("Failed to load users");
-  //     })
-  //     .finally(() => {
-  //       setLoading(false);
-  //     });
-  // }, []);
+  const {
+    users: filteredUsers,
+    loading,
+    error,
+    search,
+    setSearch,
+    filterType,
+    setFilterType,
+    selectedUser,
+    setSelectedUser,
+  } = useUsers();
 
   function openModal(user) {
     setSelectedUser(user);
@@ -36,16 +26,12 @@ function Dashboard() {
   }
 
   if (loading) {
-    return <Loading text="Please wait..."/>;
+    return <Loading text="Please wait..." />;
   }
 
   if (error) {
     return <h2 style={{ color: "red" }}>{error}</h2>;
   }
-
-  const filteredUsers = users.filter((user) =>
-    user.name.toLowerCase().includes(search.toLowerCase()),
-  );
 
   return (
     <div>
@@ -56,8 +42,16 @@ function Dashboard() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <hr />
 
+      <select
+        value={filterType}
+        onChange={(e) => setFilterType(e.target.value)}
+      >
+        <option value="all">All Users</option>
+        <option value="idSmall">User ID ≤ 5</option>
+        <option value="startsWithA">Name starts with A</option>
+      </select>
+      <hr />
       <UserList users={filteredUsers} onViewUser={openModal} />
       <hr />
 
