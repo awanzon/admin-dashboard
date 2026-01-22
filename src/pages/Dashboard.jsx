@@ -1,9 +1,8 @@
-import { getUsers } from "../api/users.js";
-import { useEffect } from "react";
 import { useState } from "react";
 import { useUsers } from "../hooks/useUsers.jsx";
 import UserList from "../components/UserList.jsx";
 import UserDetail from "../components/UserDetail.jsx";
+import Loading from "../components/Loading.jsx";
 
 function Dashboard() {
   const { users, loading, error } = useUsers();
@@ -37,9 +36,9 @@ function Dashboard() {
   }
 
   if (loading) {
-    return <h2>Loading Users...</h2>;
+    return <Loading text="Please wait..."/>;
   }
-  
+
   if (error) {
     return <h2 style={{ color: "red" }}>{error}</h2>;
   }

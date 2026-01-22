@@ -14,12 +14,12 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: "24px"
+    padding: "24px",
   },
   spinner: {
     width: "32px",
     height: "32px",
-    border: "4px solid #ddd"
+    border: "4px solid #ddd",
     borderTop: "4px solid #333",
     borderRadius: "50%",
     animation: "spin 1s linear infinite",
