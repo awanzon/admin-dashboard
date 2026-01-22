@@ -1,30 +1,32 @@
 import { getUsers } from "../api/users.js";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useUsers } from "../hooks/useUsers.jsx";
 import UserList from "../components/UserList.jsx";
 import UserDetail from "../components/UserDetail.jsx";
 
 function Dashboard() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { users, loading, error } = useUsers();
+  // const [users, setUsers] = useState([]);
+  // const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
 
-  useEffect(() => {
-    getUsers()
-      .then((data) => {
-        setUsers(data);
-        setError(null);
-      })
-      .catch((err) => {
-        console.error(err);
-        setError("Failed to load users");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  // useEffect(() => {
+  //   getUsers()
+  //     .then((data) => {
+  //       setUsers(data);
+  //       setError(null);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //       setError("Failed to load users");
+  //     })
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  // }, []);
 
   function openModal(user) {
     setSelectedUser(user);

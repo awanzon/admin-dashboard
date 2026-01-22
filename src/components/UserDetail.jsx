@@ -9,7 +9,6 @@ function UserDetail({ user, onClose }) {
         <p>Username: {user.username}</p>
         <p>Email: {user.email}</p>
         <p>Phone: {user.phone}</p>
-
         <button onClick={onClose}>Close</button>
       </div>
     </div>

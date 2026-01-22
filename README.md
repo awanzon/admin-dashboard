@@ -26,6 +26,7 @@ The project is built as part of my journey to become a **job-ready junior fronte
 - **User Detail Modal** – View user details in a popup/modal
 - **Loading State** – Show loading indicator while fetching data
 - **Error Handling** – Graceful UI for API errors and failed requests
+- **UseUsers.jsx** - Create Custom Hook to seperate logic and UI from Dashboard.jsx 
 
  🚧 In Progress
 
@@ -34,8 +35,9 @@ The project is built as part of my journey to become a **job-ready junior fronte
  📝 Planned
 
 
+- **Loading.jsx** - set loading that can be use for any components
 - **UseCard.jsx** - set this file 
-- **MockUsers.js** - set this file 
+- **MockUsers.js** - Create Mock Api 
 
 ---
 
