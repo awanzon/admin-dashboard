@@ -1,6 +1,6 @@
 function UserDetail({ user, onClose }) {
   if (!user) return null;
-
+  const ad = user.address;
   return (
     <div style={overlayStyle} onClick={onClose}>
       <div style={modalStyle} onClick={(e) => e.stopPropagation()}>
@@ -9,6 +9,10 @@ function UserDetail({ user, onClose }) {
         <p>Username: {user.username}</p>
         <p>Email: {user.email}</p>
         <p>Phone: {user.phone}</p>
+        <p>Website: {user.website}</p>
+        <p>
+          Address: {ad?.street} St, {ad?.city}, {ad?.zipcode}
+        </p>
         <button onClick={onClose}>Close</button>
       </div>
     </div>

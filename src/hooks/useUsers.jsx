@@ -25,6 +25,7 @@ function useUsers() {
   }, []);
 
   const searchValue = search.toLowerCase();
+
   const filteredUsers = users.filter((user) => {
     const matchesSearch =
       user.name.toLowerCase().includes(searchValue) ||
@@ -32,7 +33,7 @@ function useUsers() {
       user.phone.includes(searchValue);
 
     if (!matchesSearch) return false;
-    
+
     if (filterType === "idSmall") return user.id <= 5;
     if (filterType === "startsWithA")
       return user.name.toLowerCase().startsWith("a");

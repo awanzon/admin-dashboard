@@ -28,15 +28,20 @@ The project is built as part of my journey to become a **job-ready junior fronte
 - **Error Handling** – Graceful UI for API errors and failed requests
 - **UseUsers.jsx** - Create Custom Hook to seperate logic and UI from Dashboard.jsx
 - **Loading.jsx** - set loading that can be use for any components 
+- **Filter** – Filter users based on conditions
+- **UseCard.jsx** - seperate UserList(Loop Data) and UserCard (Show Specific User Detail)
 
  🚧 In Progress
 
-- **Filter** – Filter users based on conditions
+
+- **getUsers() refactor** change then() to try()
 
  📝 Planned
 
-- **UseCard.jsx** - set this file 
-- **MockUsers.js** - Create Mock Api 
+- **Tailwind Styling** - Add Tailwind CSS and refactor style for all the UI 
+- **MockUsers.js** - Create Mock Api (data users)
+- **EmptyState.jsx** - if the data users is empty
+  
 
 ---
 

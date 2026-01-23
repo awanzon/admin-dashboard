@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useUsers } from "../hooks/useUsers.jsx";
 import UserList from "../components/UserList.jsx";
 import UserDetail from "../components/UserDetail.jsx";
