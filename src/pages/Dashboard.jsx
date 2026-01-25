@@ -2,6 +2,7 @@ import { useUsers } from "../hooks/useUsers.jsx";
 import UserList from "../components/UserList.jsx";
 import UserDetail from "../components/UserDetail.jsx";
 import Loading from "../components/Loading.jsx";
+import EmptyState from "../components/EmptyState.jsx";
 
 function Dashboard() {
   const {
@@ -51,7 +52,12 @@ function Dashboard() {
         <option value="startsWithA">Name starts with A</option>
       </select>
       <hr />
-      <UserList users={filteredUsers} onViewUser={openModal} />
+      
+      {filteredUsers.length === 0 ? (
+        <EmptyState message="No users match your search" />
+      ) : (
+        <UserList users={filteredUsers} onViewUser={openModal} />
+      )}
       <hr />
 
       {selectedUser && <UserDetail user={selectedUser} onClose={closeModal} />}

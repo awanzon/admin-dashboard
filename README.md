@@ -32,10 +32,11 @@ The project is built as part of my journey to become a **job-ready junior fronte
 - **UseCard.jsx** - seperate UserList(Loop Data) and UserCard (Show Specific User Detail)
 - **getUsers() refactor** change then() to try()
 - **MockUsers.js** - Create Mock Api (data users)
+- **EmptyState.jsx** - if the data users is empty
 
  🚧 In Progress
 
-- **EmptyState.jsx** - if the data users is empty
+
 - **ErrorMessage.jsx** - add error message
 
  📝 Planned

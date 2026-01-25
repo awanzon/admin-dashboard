@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getUsers } from "../api/users";
-import mockUsers from "../data/mockUsers";
+import mockUsers from "../mocks/mockUsers";
 
 function useUsers() {
   const [users, setUsers] = useState([]);
