@@ -31,15 +31,16 @@ The project is built as part of my journey to become a **job-ready junior fronte
 - **Filter** – Filter users based on conditions
 - **UseCard.jsx** - seperate UserList(Loop Data) and UserCard (Show Specific User Detail)
 - **getUsers() refactor** change then() to try()
+- **MockUsers.js** - Create Mock Api (data users)
 
  🚧 In Progress
 
-- **MockUsers.js** - Create Mock Api (data users)
+- **EmptyState.jsx** - if the data users is empty
+- **ErrorMessage.jsx** - add error message
 
  📝 Planned
 
 - **Tailwind Styling** - Add Tailwind CSS and refactor style for all the UI 
-- **EmptyState.jsx** - if the data users is empty
   
 
 ---

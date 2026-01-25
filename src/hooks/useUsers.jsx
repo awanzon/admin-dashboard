@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getUsers } from "../api/users";
+import mockUsers from "../data/mockUsers";
 
 function useUsers() {
   const [users, setUsers] = useState([]);
@@ -13,9 +14,12 @@ function useUsers() {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        setLoading(true);
-        const data = await getUsers();
-        setUsers(data);
+        // setLoading(true);
+        // const data = await getUsers(); //external data
+        // setUsers(data);
+        await new Promise((res) => //internal data(mock)
+        setTimeout(res,500));
+        setUsers(mockUsers);
         setError(null);
       } catch (error) {
         console.error(error);
@@ -27,20 +31,6 @@ function useUsers() {
 
     fetchUsers();
   }, []);
-
-  //   getUsers()
-  //     .then((data) => {
-  //       setUsers(data);
-  //       setError(null);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //       setError("Failed to load users");
-  //     })
-  //     .finally(() => {
-  //       setLoading(false);
-  //     });
-  // }, []);
 
   //Filtering users by search value
   const searchValue = search.toLowerCase();

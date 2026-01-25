@@ -9,10 +9,12 @@ function UserDetail({ user, onClose }) {
         <p>Username: {user.username}</p>
         <p>Email: {user.email}</p>
         <p>Phone: {user.phone}</p>
-        <p>Website: {user.website}</p>
-        <p>
-          Address: {ad?.street} St, {ad?.city}, {ad?.zipcode}
-        </p>
+        {user.website && <p>Website: {user.website}</p>}
+        {ad && (
+          <p>
+            Address: {ad?.street} St, {ad?.city}, {ad?.zipcode}
+          </p>
+        )}
         <button onClick={onClose}>Close</button>
       </div>
     </div>
