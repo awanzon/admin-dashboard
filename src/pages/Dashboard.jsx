@@ -3,6 +3,7 @@ import UserList from "../components/UserList.jsx";
 import UserDetail from "../components/UserDetail.jsx";
 import Loading from "../components/Loading.jsx";
 import EmptyState from "../components/EmptyState.jsx";
+import ErrorMessage from "../components/ErrorMessage.jsx";
 
 function Dashboard() {
   const {
@@ -30,7 +31,12 @@ function Dashboard() {
   }
 
   if (error) {
-    return <h2 style={{ color: "red" }}>{error}</h2>;
+    return (
+      <ErrorMessage 
+      message={error} 
+      onRetry={() => window.location.reload()} 
+      />
+    );
   }
 
   return (

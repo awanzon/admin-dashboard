@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getUsers } from "../api/users";
-import mockUsers from "../mocks/mockUsers";
+import { getUsers } from "../api/users"; //external data
+import mockUsers from "../mocks/mockUsers"; //internal data(mock)
 
 function useUsers() {
   const [users, setUsers] = useState([]);
@@ -14,12 +14,12 @@ function useUsers() {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        // setLoading(true);
-        // const data = await getUsers(); //external data
-        // setUsers(data);
-        await new Promise((res) => //internal data(mock)
-        setTimeout(res,500));
-        setUsers(mockUsers);
+        setLoading(true);
+        const data = await getUsers(); //external data
+        setUsers(data);
+        // await new Promise((res) => //internal data(mock)
+        // setTimeout(res,500));
+        // setUsers(mockUsers);
         setError(null);
       } catch (error) {
         console.error(error);

@@ -30,18 +30,19 @@ The project is built as part of my journey to become a **job-ready junior fronte
 - **Loading.jsx** - set loading that can be use for any components 
 - **Filter** – Filter users based on conditions
 - **UseCard.jsx** - seperate UserList(Loop Data) and UserCard (Show Specific User Detail)
-- **getUsers() refactor** change then() to try()
 - **MockUsers.js** - Create Mock Api (data users)
 - **EmptyState.jsx** - if the data users is empty
+- **ErrorMessage.jsx** - add error message UI
 
  🚧 In Progress
 
 
-- **ErrorMessage.jsx** - add error message
+
 
  📝 Planned
 
 - **Tailwind Styling** - Add Tailwind CSS and refactor style for all the UI 
+- **Next js Upgrade** - Upgrade to Next.js (Routing, SEO, SSR, Production Setup) 
   
 
 ---

@@ -44,6 +44,24 @@ const mockUsers = [
     role: "user",
     active: false,
   },
+  {
+    id: 6,
+    name: "Satrio Permoto",
+    username: "satrio",
+    email: "satrio@example.com",
+    phone: "0815-9999-7638",
+    role: "user",
+    active: false,
+  },
+  {
+    id: 7,
+    name: "Rara Ayuningtyas",
+    username: "rara",
+    email: "raraayu@example.com",
+    phone: "0815-9973-0267",
+    role: "user",
+    active: true,
+  },
 ];
 
 export default mockUsers;
