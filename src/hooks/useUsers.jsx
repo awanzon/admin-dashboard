@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getUsers } from "../api/users"; //external data
-import mockUsers from "../mocks/mockUsers"; //internal data(mock)
+import { getUsers } from "../data/api/users"; //external data(API)
+// import mockUsers from "../data/mocks/mockUsers"; //internal data(mock)
 
 function useUsers() {
   const [users, setUsers] = useState([]);
@@ -14,12 +14,8 @@ function useUsers() {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        setLoading(true);
-        const data = await getUsers(); //external data
-        setUsers(data);
-        // await new Promise((res) => //internal data(mock)
-        // setTimeout(res,500));
-        // setUsers(mockUsers);
+        setUsers(await getUsers()); //external data(API)
+        // setUsers(mockUsers); //internal data(mock)
         setError(null);
       } catch (error) {
         console.error(error);
@@ -47,6 +43,17 @@ function useUsers() {
     return true;
   });
 
+  
+  function handleDeleteUser(userId) {
+    const confirmed = window.confirm("Are you sure to delete this user?");
+    if (!confirmed) return;
+
+    setUsers((prevUsers) => 
+      prevUsers.filter((user) => user.id !== userId)
+    );
+    setSelectedUser(null);
+  }
+
   return {
     users: filteredUsers,
     loading,
@@ -57,6 +64,7 @@ function useUsers() {
     setFilterType,
     selectedUser,
     setSelectedUser,
+    handleDeleteUser,
   };
 }
 

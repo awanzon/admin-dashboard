@@ -36,7 +36,7 @@ The project is built as part of my journey to become a **job-ready junior fronte
 
  🚧 In Progress
 
-
+-**add Create, Read, Update, and Delete logic** - CRUD 
 
 
  📝 Planned
@@ -62,16 +62,18 @@ The project is built as part of my journey to become a **job-ready junior fronte
 
 ```
 src/
- |--api/
- │   > users.js        # Axios API layer
+ |--data/
+ │  --api/
+ │      > users.js        # Axios API layer
+ |  --mocks/
+ |      > MockUsers.js    # Mock data (development)
  |--components/
- │   > UserList.jsx    # List & Detail button
- │   > UserCard.jsx    # 
- │   > UserDetail.jsx  # Modal (popup View detail Users)
+ │      > UserList.jsx    # List & Detail button
+ │      > UserCard.jsx    # 
+ │      > UserDetail.jsx  # Modal (popup View detail Users)
  |--pages/
- │   > Dashboard.jsx   # Parent here
- |--mocks/
- │   > MockUsers.js    # Mock data (development)
+ │      > Dashboard.jsx   # Parent here
+ │   
 ```
 
 ---
@@ -99,7 +101,7 @@ npm run dev
 // 📌 Notes
 
 * This project focuses on **frontend logic and UI behavior**.
-* Backend is simulated using a public API / mock data.
+* Backend is simulated using a public API / mock data(data is changeable in useUsers.jsx).
 * Styling is intentionally kept simple to prioritize functionality and structure.
 
 ---

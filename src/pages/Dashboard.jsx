@@ -16,6 +16,7 @@ function Dashboard() {
     setFilterType,
     selectedUser,
     setSelectedUser,
+    handleDeleteUser,
   } = useUsers();
 
   function openModal(user) {
@@ -62,11 +63,11 @@ function Dashboard() {
       {filteredUsers.length === 0 ? (
         <EmptyState message="No users match your search" />
       ) : (
-        <UserList users={filteredUsers} onViewUser={openModal} />
+        <UserList users={filteredUsers} onViewUser={openModal} onDeleteUser={handleDeleteUser} />
       )}
       <hr />
 
-      {selectedUser && <UserDetail user={selectedUser} onClose={closeModal} />}
+      {selectedUser && <UserDetail user={selectedUser} onClose={closeModal} deleteUser={handleDeleteUser} />}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-function UserDetail({ user, onClose }) {
+function UserDetail({ user, onClose, deleteUser }) {
   if (!user) return null;
   const ad = user.address;
   return (
@@ -10,12 +10,22 @@ function UserDetail({ user, onClose }) {
         <p>Email: {user.email}</p>
         <p>Phone: {user.phone}</p>
         {user.website && <p>Website: {user.website}</p>}
+        {user.role && <p>Role: {user.role}</p>}
+        {user.active && (
+          <p>Status: {user.active !== false ? "Active" : "Nonactive"}</p>
+        )}
         {ad && (
           <p>
             Address: {ad?.street} St, {ad?.city}, {ad?.zipcode}
           </p>
         )}
         <button onClick={onClose}>Close</button>
+        <button 
+        onClick={() => deleteUser(user.id)}
+        style={{ color: "red" }}
+      >
+        Delete
+      </button>
       </div>
     </div>
   );
