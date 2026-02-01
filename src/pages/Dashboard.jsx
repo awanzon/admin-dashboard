@@ -4,6 +4,7 @@ import UserDetail from "../components/UserDetail.jsx";
 import Loading from "../components/Loading.jsx";
 import EmptyState from "../components/EmptyState.jsx";
 import ErrorMessage from "../components/ErrorMessage.jsx";
+import CreateUser from "../components/CreateUserModal";
 
 function Dashboard() {
   const {
@@ -12,20 +13,18 @@ function Dashboard() {
     error,
     search,
     setSearch,
+    isCreateOpen,
     filterType,
     setFilterType,
     selectedUser,
-    setSelectedUser,
+    openSelectedUser,
+    closeSelectedUser,
+    openCreate,
+    closeCreate,
+    handleCreateUser,
     handleDeleteUser,
   } = useUsers();
 
-  function openModal(user) {
-    setSelectedUser(user);
-  }
-
-  function closeModal() {
-    setSelectedUser(null);
-  }
 
   if (loading) {
     return <Loading text="Please wait..." />;
@@ -58,16 +57,31 @@ function Dashboard() {
         <option value="idSmall">User ID ≤ 5</option>
         <option value="startsWithA">Name starts with A</option>
       </select>
+
+      <button onClick={openCreate}>
+        + Add User
+      </button>
+
+      {isCreateOpen && (
+        <CreateUser
+          onCreate={handleCreateUser}
+          onClose={closeCreate} 
+        />
+      )}
       <hr />
       
       {filteredUsers.length === 0 ? (
         <EmptyState message="No users match your search" />
       ) : (
-        <UserList users={filteredUsers} onViewUser={openModal} onDeleteUser={handleDeleteUser} />
+        <UserList 
+          users={filteredUsers} 
+          onViewUser={openSelectedUser} 
+          onDeleteUser={handleDeleteUser} 
+        />
       )}
       <hr />
 
-      {selectedUser && <UserDetail user={selectedUser} onClose={closeModal} deleteUser={handleDeleteUser} />}
+      {selectedUser && <UserDetail user={selectedUser} onClose={closeSelectedUser} deleteUser={handleDeleteUser} />}
     </div>
   );
 }

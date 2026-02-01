@@ -1,6 +1,7 @@
 function UserDetail({ user, onClose, deleteUser }) {
   if (!user) return null;
   const ad = user.address;
+
   return (
     <div style={overlayStyle} onClick={onClose}>
       <div style={modalStyle} onClick={(e) => e.stopPropagation()}>
@@ -14,11 +15,13 @@ function UserDetail({ user, onClose, deleteUser }) {
         {user.active && (
           <p>Status: {user.active !== false ? "Active" : "Nonactive"}</p>
         )}
+        
         {ad && (
           <p>
-            Address: {ad?.street} St, {ad?.city}, {ad?.zipcode}
+            Address: {ad?.street || "-"} {ad?.city || ""} {ad?.zipcode || ""} {ad}
           </p>
         )}
+
         <button onClick={onClose}>Close</button>
         <button 
         onClick={() => deleteUser(user.id)}

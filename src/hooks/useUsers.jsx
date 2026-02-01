@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getUsers } from "../data/api/users"; //external data(API)
-// import mockUsers from "../data/mocks/mockUsers"; //internal data(mock)
+import mockUsers from "../data/mocks/mockUsers"; //internal data(mock)
 
 function useUsers() {
   const [users, setUsers] = useState([]);
@@ -9,13 +9,14 @@ function useUsers() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [search, setSearch] = useState("");
   const [filterType, setFilterType] = useState("all");
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
 
   //Fetch users when dashboard is mounted
   useEffect(() => {
     async function fetchUsers() {
       try {
-        setUsers(await getUsers()); //external data(API)
-        // setUsers(mockUsers); //internal data(mock)
+        // setUsers(await getUsers()); //external data(API)
+        setUsers(mockUsers); //internal data(mock)
         setError(null);
       } catch (error) {
         console.error(error);
@@ -43,15 +44,39 @@ function useUsers() {
     return true;
   });
 
-  
+//view selected user
+  function openSelectedUser(user) {
+    setSelectedUser(user);
+  }
+
+  function closeSelectedUser() {
+    setSelectedUser(null);
+  }
+
+//add new user
+  function openCreate() {
+    setIsCreateOpen(true);
+  }
+
+  function closeCreate() {
+    setIsCreateOpen(false);
+  }
+
+  function handleCreateUser(newUser) {
+    setUsers((prevUsers) => [newUser, ...prevUsers]);
+  }
+
+//delete user
   function handleDeleteUser(userId) {
     const confirmed = window.confirm("Are you sure to delete this user?");
     if (!confirmed) return;
 
-    setUsers((prevUsers) => 
-      prevUsers.filter((user) => user.id !== userId)
-    );
-    setSelectedUser(null);
+    //getting updated users after delete confirm or cancel
+    setUsers((prevUsers) => {
+      const updated = prevUsers.filter((u) => u.id !== userId);
+      if (selectedUser?.id === userId) {setSelectedUser(null)}
+      return updated;
+    });
   }
 
   return {
@@ -60,10 +85,15 @@ function useUsers() {
     error,
     search,
     setSearch,
+    isCreateOpen,
     filterType,
     setFilterType,
     selectedUser,
-    setSelectedUser,
+    openSelectedUser,
+    closeSelectedUser,
+    openCreate,
+    closeCreate,
+    handleCreateUser,
     handleDeleteUser,
   };
 }
