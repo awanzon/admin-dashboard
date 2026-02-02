@@ -6,6 +6,7 @@ function UserDetail({ user, onClose, deleteUser, editUser }) {
     <div style={overlayStyle} onClick={onClose}>
       <div style={modalStyle} onClick={(e) => e.stopPropagation()}>
         <h2>User Detail</h2>
+        <p>ID: {user.id}</p>
         <p>Name: {user.name}</p>
         <p>Username: {user.username}</p>
         <p>Email: {user.email}</p>

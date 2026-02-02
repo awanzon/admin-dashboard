@@ -15,7 +15,7 @@ function CreateUser({ onCreate, onClose }) {
     }
 
     const newUser = {
-      id: Date.now(),
+      id: crypto.randomUUID(),
       name,
       email,
       phone,
@@ -36,20 +36,20 @@ function CreateUser({ onCreate, onClose }) {
 
         <form onSubmit={handleSubmit}>
           <input
-            placeholder="Name"
+            placeholder="Name*"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
 
           <input
-            placeholder="Email"
+            placeholder="Email*"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
           <input
             type="tel"
-            placeholder="Phone"
+            placeholder="Phone*"
             value={phone}
             onChange={(e) => {
               const value = e.target.value;

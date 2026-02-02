@@ -14,6 +14,7 @@ function EditUser({ user, onUpdate, onClose }) {
       name,
       email,
       phone,
+      address,
     };
 
     onUpdate(updatedUser);
