@@ -10,6 +10,7 @@ function useUsers() {
   const [search, setSearch] = useState("");
   const [filterType, setFilterType] = useState("all");
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [editingUser, setEditingUser] = useState(null);
 
   //Fetch users when dashboard is mounted
   useEffect(() => {
@@ -44,7 +45,7 @@ function useUsers() {
     return true;
   });
 
-//view selected user
+ //view selected user
   function openSelectedUser(user) {
     setSelectedUser(user);
   }
@@ -53,7 +54,8 @@ function useUsers() {
     setSelectedUser(null);
   }
 
-//add new user
+
+ //add new user
   function openCreate() {
     setIsCreateOpen(true);
   }
@@ -66,7 +68,8 @@ function useUsers() {
     setUsers((prevUsers) => [newUser, ...prevUsers]);
   }
 
-//delete user
+
+ //delete user
   function handleDeleteUser(userId) {
     const confirmed = window.confirm("Are you sure to delete this user?");
     if (!confirmed) return;
@@ -79,22 +82,46 @@ function useUsers() {
     });
   }
 
+
+ //Update user handler
+  function openEdit(user) {
+    setEditingUser(user);
+    setSelectedUser(null);
+  }
+  function closeEdit() {
+    setEditingUser(null);
+  }
+
+  function handleUpdateUser(updatedUser) {
+    setUsers((prevUsers) =>
+      prevUsers.map((user) =>
+        user.id === updatedUser.id ? updatedUser : user
+      )
+    );
+  }
+
+
+
   return {
     users: filteredUsers,
     loading,
     error,
     search,
     setSearch,
-    isCreateOpen,
     filterType,
     setFilterType,
     selectedUser,
     openSelectedUser,
     closeSelectedUser,
+    isCreateOpen,
     openCreate,
     closeCreate,
     handleCreateUser,
     handleDeleteUser,
+    editingUser,
+    openEdit,
+    closeEdit,
+    handleUpdateUser,
   };
 }
 

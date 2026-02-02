@@ -37,6 +37,8 @@ The project is built as part of my journey to become a **job-ready junior fronte
  🚧 In Progress
 
 -**add Create, Read, Update, and Delete logic** - CRUD 
+-**edit button inside User Detail** - must be fix(on going)
+-**when updated user but address doesn't update/stay the same** - must be fix(on going)
 
 
  📝 Planned
@@ -63,16 +65,23 @@ The project is built as part of my journey to become a **job-ready junior fronte
 ```
 src/
  |--data/
- │  --api/
- │      > users.js        # Axios API layer
- |  --mocks/
- |      > MockUsers.js    # Mock data (development)
+ │   -api/
+ │      > users.js              # Axios API layer
+ |   -mocks/
+ |      > MockUsers.js          # Mock data (development)
  |--components/
- │      > UserList.jsx    # List & Detail button
- │      > UserCard.jsx    # 
- │      > UserDetail.jsx  # Modal (popup View detail Users)
+ │      > UserList.jsx          # Loop data user to display
+ │      > UserCard.jsx          # Display List & Detail button
+ │      > UserDetail.jsx        # Modal (popup View detail Users)
+ │      > Loading.jsx           # Loading UI
+ │      > ErrorMessage.jsx      # Error Message
+ │      > EmptyState.jsx        # Show no data found
+ │      > CreateUserModal.jsx   # Create new User
+ │      > EditUserModal.jsx     # Update user 
  |--pages/
- │      > Dashboard.jsx   # Parent here
+ │      > Dashboard.jsx         # Parent UI here
+ |--hooks/
+ │      > useUsers.jsx          # Parent Logic here
  │   
 ```
 
@@ -101,7 +110,7 @@ npm run dev
 // 📌 Notes
 
 * This project focuses on **frontend logic and UI behavior**.
-* Backend is simulated using a public API / mock data(data is changeable in useUsers.jsx).
+* Backend is simulated using a Mock data / public API (data is changeable in useUsers.jsx).
 * Styling is intentionally kept simple to prioritize functionality and structure.
 
 ---

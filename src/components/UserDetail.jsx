@@ -1,4 +1,4 @@
-function UserDetail({ user, onClose, deleteUser }) {
+function UserDetail({ user, onClose, deleteUser, editUser }) {
   if (!user) return null;
   const ad = user.address;
 
@@ -26,9 +26,12 @@ function UserDetail({ user, onClose, deleteUser }) {
         <button 
         onClick={() => deleteUser(user.id)}
         style={{ color: "red" }}
-      >
-        Delete
-      </button>
+        >
+          Delete
+        </button>
+        <button onClick={() => editUser(user)}>
+          Edit
+        </button>
       </div>
     </div>
   );

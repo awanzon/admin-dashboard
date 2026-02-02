@@ -5,6 +5,8 @@ import Loading from "../components/Loading.jsx";
 import EmptyState from "../components/EmptyState.jsx";
 import ErrorMessage from "../components/ErrorMessage.jsx";
 import CreateUser from "../components/CreateUserModal";
+import EditUser from "../components/EditUserModal.jsx";
+
 
 function Dashboard() {
   const {
@@ -23,6 +25,10 @@ function Dashboard() {
     closeCreate,
     handleCreateUser,
     handleDeleteUser,
+    editingUser,
+    openEdit,
+    closeEdit,
+    handleUpdateUser,
   } = useUsers();
 
 
@@ -44,7 +50,7 @@ function Dashboard() {
       <h1>Admin Dashboard</h1>
       <input
         type="text"
-        placeholder="Search User..."
+        placeholder="Search Name/Phone..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
@@ -75,13 +81,25 @@ function Dashboard() {
       ) : (
         <UserList 
           users={filteredUsers} 
-          onViewUser={openSelectedUser} 
-          onDeleteUser={handleDeleteUser} 
+          viewDetail={openSelectedUser} 
         />
       )}
       <hr />
 
-      {selectedUser && <UserDetail user={selectedUser} onClose={closeSelectedUser} deleteUser={handleDeleteUser} />}
+      {selectedUser && <UserDetail 
+      user={selectedUser} 
+      onClose={closeSelectedUser} 
+      deleteUser={handleDeleteUser}
+      editUser={openEdit}
+      />}
+
+      {editingUser && (
+        <EditUser 
+          user={editingUser}
+          onUpdate={handleUpdateUser}
+          onClose={closeEdit}
+        />
+      )}
     </div>
   );
 }
