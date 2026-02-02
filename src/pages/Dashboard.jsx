@@ -47,7 +47,9 @@ function Dashboard() {
 
   return (
     <div>
-      <h1>Admin Dashboard</h1>
+      <h1 className="text-blue-600 text-2xl font-bold mb-4">
+        Admin Dashboard
+      </h1>
       <input
         type="text"
         placeholder="Search Name/Phone..."
