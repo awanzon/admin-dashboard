@@ -1,5 +1,6 @@
 import UserCard from "./UserCard";
 
+//Loop data
 function UserList({ users, viewDetail }) {
   return (
     <ul className="divide-y">
