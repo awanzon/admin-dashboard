@@ -7,7 +7,6 @@ import ErrorMessage from "../components/ErrorMessage.jsx";
 import CreateUser from "../components/CreateUserModal";
 import EditUser from "../components/EditUserModal.jsx";
 
-
 function Dashboard() {
   const {
     users: filteredUsers,
@@ -31,77 +30,83 @@ function Dashboard() {
     handleUpdateUser,
   } = useUsers();
 
-
   if (loading) {
     return <Loading text="Please wait..." />;
   }
 
   if (error) {
     return (
-      <ErrorMessage 
-      message={error} 
-      onRetry={() => window.location.reload()} 
-      />
+      <ErrorMessage message={error} onRetry={() => window.location.reload()} />
     );
   }
 
   return (
-    <div>
-      <h1 className="text-blue-600 text-2xl font-bold mb-4">
-        Admin Dashboard
-      </h1>
-      <input
-        type="text"
-        placeholder="Search Name/Phone..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+    <div
+      className="min-h-screen bg-black"
+      style={{
+        backgroundImage: "url('/spiderman-abstrak-vibe.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="min-h-screen bg-black/80 backdrop-blur-sm p-6">
+      <div className="max-w-5xl mx-auto">
+        <h1 className="text-3xl font-bold text-white mb-2 tracking-wide">
+          Admin Dashboard
+        </h1>
+          <p className="text-sm text-gray-400 mb-8">
+            Manage users, roles, and system data
+          </p>
+          <input
+            type="text"
+            placeholder="Search Name/Phone..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full max-w-md px-4 py-2 mb-6 rounded-lg bg-neutral-900 border border-neutral-700 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-700"
+          />
 
-      <select
-        value={filterType}
-        onChange={(e) => setFilterType(e.target.value)}
-      >
-        <option value="all">All Users</option>
-        <option value="idSmall">User ID ≤ 5</option>
-        <option value="startsWithA">Name starts with A</option>
-      </select>
+          <select
+            value={filterType}
+            onChange={(e) => setFilterType(e.target.value)}
+          >
+            <option value="all">All Users</option>
+            <option value="idSmall">User ID ≤ 5</option>
+            <option value="startsWithA">Name starts with A</option>
+          </select>
 
-      <button onClick={openCreate}>
-        + Add User
-      </button>
+          <button onClick={openCreate}>+ Add User</button>
 
-      {isCreateOpen && (
-        <CreateUser
-          onCreate={handleCreateUser}
-          onClose={closeCreate} 
-        />
-      )}
-      <hr />
-      
-      {filteredUsers.length === 0 ? (
-        <EmptyState message="No users match your search" />
-      ) : (
-        <UserList 
-          users={filteredUsers} 
-          viewDetail={openSelectedUser} 
-        />
-      )}
-      <hr />
+          {isCreateOpen && (
+            <CreateUser onCreate={handleCreateUser} onClose={closeCreate} />
+          )}
 
-      {selectedUser && <UserDetail 
-      user={selectedUser} 
-      onClose={closeSelectedUser} 
-      deleteUser={handleDeleteUser}
-      editUser={openEdit}
-      />}
+          {filteredUsers.length === 0 ? (
+            <EmptyState message="No users match your search" />
+          ) : (
+            <div className="bg-neutral-900 rounded-xl p-4 shadow-lg border border-neutral-800">
+              <UserList users={filteredUsers} viewDetail={openSelectedUser} />
+            </div>
+          )}
 
-      {editingUser && (
-        <EditUser 
-          user={editingUser}
-          onUpdate={handleUpdateUser}
-          onClose={closeEdit}
-        />
-      )}
+          {selectedUser && (
+            <UserDetail
+              user={selectedUser}
+              onClose={closeSelectedUser}
+              deleteUser={handleDeleteUser}
+              editUser={openEdit}
+            />
+          )}
+
+          {editingUser && (
+            <EditUser
+              user={editingUser}
+              onUpdate={handleUpdateUser}
+              onClose={closeEdit}
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 }
