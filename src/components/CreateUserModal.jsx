@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Modal from "./Modal";
 
 function CreateUser({ onCreate, onClose }) {
   const [name, setName] = useState("");
@@ -30,20 +31,30 @@ function CreateUser({ onCreate, onClose }) {
   }
 
   return (
-    <div style={styles.overlay} onClick={onClose}>
-      <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <h3>Create User</h3>
+    <Modal onClose={onClose}>
+      <div className="flex justify-end">
+        <button
+          onClick={onClose}
+          className="mt-0 w-15 rounded-lg bg-zinc-600 py-1 font-semibold hover:bg-zinc-800"
+        >
+          Cancel
+        </button>
+      </div>
+      <div onClick={(e) => e.stopPropagation()}>
+        <h3 className="mb-4 text-xl font-bold text-red-500 flex justify-center">Create User</h3>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="space-y-4">
           <input
             placeholder="Name*"
             value={name}
+            className="w-full rounded bg-zinc-800 p-2"
             onChange={(e) => setName(e.target.value)}
           />
 
           <input
             placeholder="Email*"
             value={email}
+            className="w-full rounded bg-zinc-800 p-2"
             onChange={(e) => setEmail(e.target.value)}
           />
 
@@ -51,6 +62,7 @@ function CreateUser({ onCreate, onClose }) {
             type="tel"
             placeholder="Phone*"
             value={phone}
+            className="w-full rounded bg-zinc-800 p-2"
             onChange={(e) => {
               const value = e.target.value;
               if (/^\d*$/.test(value)) {
@@ -61,35 +73,22 @@ function CreateUser({ onCreate, onClose }) {
           <input
             placeholder="Address"
             value={address}
+            className="w-full rounded bg-zinc-800 p-2"
             onChange={(e) => setAddress(e.target.value)}
           />
 
-          <div style={{ marginTop: "12px" }}>
-            <button type="submit">Create</button>
-            <button type="button" onClick={onClose}>
-              Cancel
+          <div className="mt-4">
+            <button
+              type="submit"
+              className="w-full rounded bg-red-600 py-2 font-semibold hover:bg-red-800"
+            >
+              Create
             </button>
           </div>
         </form>
       </div>
-    </div>
+    </Modal>
   );
 }
-
-const styles = {
-  overlay: {
-    position: "fixed",
-    inset: 0,
-    background: "rgba(0,0,0,0.3)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modal: {
-    background: "#fff",
-    padding: "20px",
-    width: "300px",
-  },
-};
 
 export default CreateUser;

@@ -51,6 +51,8 @@ The goal of this project is to demonstrate my readiness as a **junior frontend d
 
 * **Tailwind CSS Integration** – Refactoring UI styles using Tailwind for scalability and consistency
 
+*Edit UserCard style
+
 ----------
 
 ### 📝 Planned

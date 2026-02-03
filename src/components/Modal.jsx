@@ -8,7 +8,7 @@ function Modal({ children, onClose }) {
       ></div>
 
       {/* modal box */}
-      <div className="relative z-10 w-full max-w-lg rounded-xl bg-zinc-900 p-6 text-black shadow-xl">
+      <div className="relative z-10 w-full max-w-lg rounded-xl bg-zinc-900 p-6 text-white shadow-xl">
         {children}
       </div>
     </div>

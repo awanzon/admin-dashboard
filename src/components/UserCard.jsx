@@ -5,7 +5,7 @@ function UserCard({ user, onView }) {
       <span>{user.name}</span>
       <button
         onClick={() => onView(user)}
-        className="text-sm text-blue-600 hover:underline cursor-pointer"
+        className="text-sm text-white hover:underline cursor-pointer"
       >
         View Detail
       </button>
