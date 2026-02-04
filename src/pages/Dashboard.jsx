@@ -88,7 +88,10 @@ function Dashboard() {
           )}
         </div>
         {filteredUsers.length === 0 ? (
-          <EmptyState message="No users match your search" />
+          <EmptyState 
+            title="No users match your search"
+            description="Try changing your search or filter criteria."
+          />
         ) : (
           <div className="bg-neutral-900 rounded-xl p-4 shadow-lg border border-neutral-800">
             <UserList users={filteredUsers} viewDetail={openSelectedUser} />

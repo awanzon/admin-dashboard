@@ -1,21 +1,20 @@
-function EmptyState({ message = "No data found" }) {
+function EmptyState({ title = "No data found", description }) {
   return (
-    <div style={style.container}>
-      <p style={style.text}>{message}</p>
+    <div
+      className="
+        flex flex-col items-center justify-center
+        text-center
+        py-16
+        bg-zinc-900/80
+        border border-zinc-800
+        rounded-xl
+      "
+    >
+      <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>
+
+      {description && <p className="text-zinc-400 max-w-md">{description}</p>}
     </div>
   );
 }
-
-const style = {
-  container: {
-    padding: "40px",
-    textAlign: "center",
-    color: "#666",
-  },
-
-  text: {
-    fontSize: "16px",
-  },
-};
 
 export default EmptyState;
