@@ -36,7 +36,7 @@ function Dashboard() {
 
   if (error) {
     return (
-      <ErrorMessage message={error} onRetry={() => window.location.reload()} />
+      <ErrorMessage title="Something went wrong" message={error} onRetry={() => window.location.reload()} />
     );
   }
 
