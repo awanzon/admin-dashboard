@@ -44,14 +44,15 @@ The goal of this project is to demonstrate my readiness as a **junior frontend d
 * **Loading State** – Reusable loading component
 * **Error Handling** – Graceful error UI for failed requests
 * **Empty State** – Clear feedback when no data matches the search
+* **Tailwind CSS Integration** – Refactoring UI styles using Tailwind for scalability and consistency
 
 ----------
 
 🚧 In Progress
 
-* **Tailwind CSS Integration** – Refactoring UI styles using Tailwind for scalability and consistency
+-
 
-*Edit filtertype style in Dashboard.jsx
+
 
 ----------
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUsers } from "../data/api/users"; //external data(API)
+// import { getUsers } from "../data/api/users"; //external data(API)
 import mockUsers from "../data/mocks/mockUsers"; //internal data(mock)
 
 function useUsers() {
@@ -11,6 +11,8 @@ function useUsers() {
   const [filterType, setFilterType] = useState("all");
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false); //saklar on/off
+  const [userToDelete, setUserToDelete] = useState(null);
 
   //Fetch users when dashboard is mounted
   useEffect(() => {
@@ -45,7 +47,7 @@ function useUsers() {
     return true;
   });
 
- //view selected user
+  //view selected user
   function openSelectedUser(user) {
     setSelectedUser(user);
   }
@@ -54,8 +56,7 @@ function useUsers() {
     setSelectedUser(null);
   }
 
-
- //add new user
+  //add new user
   function openCreate() {
     setIsCreateOpen(true);
   }
@@ -68,22 +69,32 @@ function useUsers() {
     setUsers((prevUsers) => [newUser, ...prevUsers]);
   }
 
-
- //delete user
-  function handleDeleteUser(userId) {
-    const confirmed = window.confirm("Are you sure to delete this user?");
-    if (!confirmed) return;
-
-    //getting updated users after delete confirm or cancel
-    setUsers((prevUsers) => {
-      const updated = prevUsers.filter((u) => u.id !== userId);
-      if (selectedUser?.id === userId) {setSelectedUser(null)}
-      return updated;
-    });
+  //delete user
+  function openDeleteModal(user) {
+    setUserToDelete(user);
+    setSelectedUser(false);
   }
 
+  function closeDeleteModal() {
+    setUserToDelete(null);
+  }
 
- //Update user handler
+  async function handleDeleteUser(userId) {
+    try {
+      setIsDeleting(true);
+
+      // simulate API delay
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      setUsers((prev) => prev.filter((u) => u.id !== userId));
+    } catch (err) {
+      setError("Failed to delete user");
+    } finally {
+      setIsDeleting(false);
+    }
+  }
+
+  //Update user handler
   function openEdit(user) {
     setEditingUser(user);
     setSelectedUser(null);
@@ -95,12 +106,10 @@ function useUsers() {
   function handleUpdateUser(updatedUser) {
     setUsers((prevUsers) =>
       prevUsers.map((user) =>
-        user.id === updatedUser.id ? updatedUser : user
-      )
+        user.id === updatedUser.id ? updatedUser : user,
+      ),
     );
   }
-
-
 
   return {
     users: filteredUsers,
@@ -117,6 +126,11 @@ function useUsers() {
     openCreate,
     closeCreate,
     handleCreateUser,
+    isDeleting,
+    userToDelete,
+    setUserToDelete,
+    openDeleteModal,
+    closeDeleteModal,
     handleDeleteUser,
     editingUser,
     openEdit,
@@ -126,3 +140,7 @@ function useUsers() {
 }
 
 export { useUsers };
+
+// function handleDeleteUser(userId) {
+//     const confirmed = window.confirm("Are you sure to delete this user?");
+//     if (!confirmed) return;

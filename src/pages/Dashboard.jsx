@@ -6,6 +6,7 @@ import EmptyState from "../components/EmptyState.jsx";
 import ErrorMessage from "../components/ErrorMessage.jsx";
 import CreateUser from "../components/CreateUserModal";
 import EditUser from "../components/EditUserModal.jsx";
+import DeleteUserModal from "../components/DeleteUserModal.jsx";
 
 function Dashboard() {
   const {
@@ -23,12 +24,18 @@ function Dashboard() {
     openCreate,
     closeCreate,
     handleCreateUser,
+    isDeleting,
+    userToDelete,
+    setUserToDelete,
+    openDeleteModal,
+    closeDeleteModal,
     handleDeleteUser,
     editingUser,
     openEdit,
     closeEdit,
     handleUpdateUser,
   } = useUsers();
+  
 
   if (loading) {
     return <Loading text="Please wait..." />;
@@ -36,7 +43,11 @@ function Dashboard() {
 
   if (error) {
     return (
-      <ErrorMessage title="Something went wrong" message={error} onRetry={() => window.location.reload()} />
+      <ErrorMessage
+        title="Something went wrong"
+        message={error}
+        onRetry={() => window.location.reload()}
+      />
     );
   }
 
@@ -88,7 +99,7 @@ function Dashboard() {
           )}
         </div>
         {filteredUsers.length === 0 ? (
-          <EmptyState 
+          <EmptyState
             title="No users match your search"
             description="Try changing your search or filter criteria."
           />
@@ -102,8 +113,16 @@ function Dashboard() {
           <UserDetail
             user={selectedUser}
             onClose={closeSelectedUser}
-            deleteUser={handleDeleteUser}
+            deleteUser={openDeleteModal}
             editUser={openEdit}
+          />
+        )}
+        {userToDelete && (
+          <DeleteUserModal
+            user={userToDelete}
+            isLoading={isDeleting}
+            onDelete={handleDeleteUser}
+            onClose={closeDeleteModal}
           />
         )}
 
