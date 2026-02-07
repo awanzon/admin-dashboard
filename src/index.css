@@ -4,12 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 body {
   font-family: system-ui, sans-serif;
 }

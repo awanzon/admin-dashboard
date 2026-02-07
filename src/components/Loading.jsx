@@ -1,27 +1,28 @@
 function Loading({ text = "Loading..." }) {
   return (
-    <div style={styles.wrapper}>
-      <div style={styles.spinner}></div>
-      <p>{text}</p>
+    <div
+      className="
+        flex flex-col items-center justify-center
+        min-h-screen
+        text-center
+      "
+    >
+      {/* Spinner */}
+      <div
+        className="
+          w-10 h-10
+          border-4 border-red-900/40
+          border-t-red-500
+          rounded-full
+          animate-spin
+          mb-4
+        "
+      />
+
+      {/* Text */}
+      <p className="text-red-300 text-sm tracking-wide">{text}</p>
     </div>
   );
 }
 
 export default Loading;
-
-const styles = {
-  wrapper: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    padding: "24px",
-  },
-  spinner: {
-    width: "32px",
-    height: "32px",
-    border: "4px solid #ddd",
-    borderTop: "4px solid #333",
-    borderRadius: "50%",
-    animation: "spin 1s linear infinite",
-  },
-};
