@@ -19,7 +19,7 @@ function DeleteUserModal({ user, onDelete, onClose }) {
         {isLoading && <LoadingOverlay text="Deleting user..." />}
 
         <ConfirmAction
-          title="Delete user?"
+          title="Delete User?"
           description={`This will permanently delete ${user.name}.`}
           confirmText="Delete"
           danger
