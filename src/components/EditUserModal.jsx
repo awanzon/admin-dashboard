@@ -1,7 +1,10 @@
 import { useState } from "react";
 import Modal from "./Modal";
+import ConfirmAction from "./ConfirmAction";
+import LoadingOverlay from "./LoadingOverlay";
 
 function EditUser({ user, onUpdate, onClose }) {
+  const [step, setStep] = useState("edit");
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
   const [phone, setPhone] = useState(user.phone);
@@ -9,6 +12,11 @@ function EditUser({ user, onUpdate, onClose }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setStep("confirm");
+  }
+
+  async function handleConfirmUpdate() {
+    setStep("loading");
 
     const updatedUser = {
       ...user,
@@ -18,60 +26,75 @@ function EditUser({ user, onUpdate, onClose }) {
       address,
     };
 
-    onUpdate(updatedUser);
+    await onUpdate(updatedUser);
     onClose();
   }
 
   return (
     <Modal onClose={onClose}>
-      <div className="flex justify-end">
-        <button
-          onClick={onClose}
-          className="mt-0 w-15 rounded-lg bg-gray-500 py-1 font-semibold hover:bg-gray-700"
-        >
-          Close
-        </button>
-      </div>
-      <div onClick={(e) => e.stopPropagation()}>
-        <h3 className="mb-4 text-xl font-bold text-red-500 flex justify-center">
-          Edit User
-        </h3>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            value={name}
-            className="w-full rounded bg-zinc-800 p-2"
-            onChange={(e) => setName(e.target.value)}
-          />
+      {step === "loading" && <LoadingOverlay />}
 
-          <input
-            value={email}
-            className="w-full rounded bg-zinc-800 p-2"
-            onChange={(e) => setEmail(e.target.value)}
-          />
+      {step === "confirm" && (
+        <ConfirmAction
+          title="Confirm Update"
+          message={`Save changes for ${name}?`}
+          onCancel={() => setStep("edit")}
+          onConfirm={handleConfirmUpdate}
+        />
+      )}
 
-          <input
-            value={phone}
-            className="w-full rounded bg-zinc-800 p-2"
-            onChange={(e) => setPhone(e.target.value)}
-          />
-
-          <input
-            value={address}
-            className="w-full rounded bg-zinc-800 p-2"
-            placeholder="Address"
-            onChange={(e) => setAddress(e.target.value)}
-          />
-
-          <div className="mt-4">
+      {step === "edit" && (
+        <>
+          <div className="flex justify-end">
             <button
-              type="submit"
-              className="w-40 rounded bg-red-600 py-2 font-semibold hover:bg-red-800"
+              onClick={onClose}
+              className="mt-0 w-15 rounded-lg bg-gray-500 py-1 font-semibold hover:bg-gray-700"
             >
-              Update
+              Close
             </button>
           </div>
-        </form>
-      </div>
+          <div onClick={(e) => e.stopPropagation()}>
+            <h3 className="mb-4 text-xl font-bold text-red-500 flex justify-center">
+              Edit User
+            </h3>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <input
+                value={name}
+                className="w-full rounded bg-zinc-800 p-2"
+                onChange={(e) => setName(e.target.value)}
+              />
+
+              <input
+                value={email}
+                className="w-full rounded bg-zinc-800 p-2"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+
+              <input
+                value={phone}
+                className="w-full rounded bg-zinc-800 p-2"
+                onChange={(e) => setPhone(e.target.value)}
+              />
+
+              <input
+                value={address}
+                className="w-full rounded bg-zinc-800 p-2"
+                placeholder="Address"
+                onChange={(e) => setAddress(e.target.value)}
+              />
+
+              <div className="mt-4">
+                <button
+                  type="submit"
+                  className="w-40 rounded bg-red-600 py-2 font-semibold hover:bg-red-800"
+                >
+                  Update
+                </button>
+              </div>
+            </form>
+          </div>
+        </>
+      )}
     </Modal>
   );
 }

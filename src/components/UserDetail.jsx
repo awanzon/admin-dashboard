@@ -1,34 +1,12 @@
 import Modal from "./Modal";
-import Loading from "./Loading";
-import { useUsers } from "../hooks/useUsers";
 
 function UserDetail({ user, onClose, deleteUser, editUser }) {
   if (!user) return null;
   const ad = user.address;
-  const {
-    userToDelete,
-
-  } = useUsers();
-
-  // function handleDelete() {
-  //   setIsLoading(true);
-
-  //   setTimeout(() => {
-  //     // simulate API call
-  //     setIsLoading(false);
-  //     onClose();
-  //   }, 1500);
-  // }
-
 
   return (
     <Modal onClose={onClose}>
       <div>
-        {/* {isLoading && (
-          <div className="absolute inset-0 bg-black/50 flex items-center justify-center rounded-lg z-50">
-            <Loading text="Processing..." />
-          </div>
-        )} */}
         <div className="flex justify-end">
           <button
             onClick={onClose}
@@ -84,7 +62,6 @@ function UserDetail({ user, onClose, deleteUser, editUser }) {
 
           <button
             onClick={() => deleteUser(user)}
-            // disabled={isLoading}
             className="mt-6 w-full rounded-lg bg-zinc-500 py-2 font-semibold hover:bg-zinc-700"
           >
             Delete
@@ -102,11 +79,3 @@ function UserDetail({ user, onClose, deleteUser, editUser }) {
 }
 
 export default UserDetail;
-
-// () => deleteUser(user.id)
-
-// {`mt-6 w-full rounded-lg bg-zinc-500 py-2 font-semibold hover:bg-zinc-700 ${
-//               isLoading
-//                 ? "bg-gray-400 cursor-not-allowed"
-//                 : "bg-red-600 hover:bg-red-700"
-//             }`}

@@ -103,12 +103,20 @@ function useUsers() {
     setEditingUser(null);
   }
 
-  function handleUpdateUser(updatedUser) {
-    setUsers((prevUsers) =>
-      prevUsers.map((user) =>
-        user.id === updatedUser.id ? updatedUser : user,
-      ),
-    );
+  async function handleUpdateUser(updatedUser) {
+    setEditingUser(true);
+
+    try {
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === updatedUser.id ? updatedUser : user,
+        ),
+      );
+    } catch (err) {
+      setError("Failed to Update the Data");
+    } finally {
+      setEditingUser(false);
+    }
   }
 
   return {
