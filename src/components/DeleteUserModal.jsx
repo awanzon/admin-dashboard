@@ -6,7 +6,7 @@ import LoadingOverlay from "./LoadingOverlay";
 function DeleteUserModal({ user, onDelete, onClose }) {
   const [isLoading, setIsLoading] = useState(false);
 
-  async function handleConfirm() {
+  async function handleConfirmDelete() {
     setIsLoading(true);
     await onDelete(user.id); // async delete
     setIsLoading(false);
@@ -24,7 +24,7 @@ function DeleteUserModal({ user, onDelete, onClose }) {
           confirmText="Delete"
           danger
           onCancel={onClose}
-          onConfirm={handleConfirm}
+          onConfirm={handleConfirmDelete}
         />
       </div>
     </Modal>
