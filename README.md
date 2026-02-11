@@ -34,7 +34,7 @@ The goal of this project is to demonstrate my readiness as a **junior frontend d
 
 * **Mock API (`MockUsers.js`)** – Simulates backend user data
 * **Custom Hook (`useUsers.jsx`)** – Centralized logic for data fetching, CRUD, loading, and error states
-* **Axios API Layer** – Abstracted API calls for better separation of concerns
+* **Axios API Layer** – Abstracted API calls for better separation of concerns(used for real API)
 
 > UI & UX
 
@@ -42,6 +42,7 @@ The goal of this project is to demonstrate my readiness as a **junior frontend d
 * **User Detail Modal** – View detailed user information
 * **Search & Filter** – Search users by name, phone, or email
 * **Loading State** – Reusable loading component
+* **Loading Overlay** – Reusable for after Confirmation Changing data
 * **Error Handling** – Graceful error UI for failed requests
 * **Empty State** – Clear feedback when no data matches the search
 * **Tailwind CSS Integration** – Refactoring UI styles using Tailwind for scalability and consistency
@@ -58,7 +59,7 @@ The goal of this project is to demonstrate my readiness as a **junior frontend d
 
 ### 📝 Planned
 
-* **Next.js Migration**
+-
 
   * File-based routing
   * SEO improvements
@@ -97,10 +98,14 @@ src/
 │   > UserCard.jsx             # Individual user display
 │   > UserDetail.jsx           # User detail modal
 │   > CreateUserModal.jsx      # Create user modal
+│   > DeleteUserModal.jsx      # Delete Confirmation UI
 │   > EditUserModal.jsx        # Update user modal
+│   > Modal.jsx                # Reusable Modal Confirmation UI
 │   > Loading.jsx              # Reusable loading UI
+│   > LoadingOverlay.jsx       # loading UI after Confirmation
 │   > ErrorMessage.jsx         # Error UI
 │   > EmptyState.jsx           # Empty state UI
+│   > ConfirmAction.jsx        # Reusable Confirmation UI
 │
 |--hooks/
 │   > useUsers.jsx             # Centralized user logic

@@ -29,7 +29,7 @@ function EditUser({ user, onUpdate, onClose }) {
     };
 
     try {
-      await new Promise(r => setTimeout(r, 1000));
+      await new Promise(r => setTimeout(r, 1000)); // key to show loading overlay
       await onUpdate(updatedUser);
     } catch (error) {
       console.error("Update failed:",error);
