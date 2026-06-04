@@ -1,13 +1,22 @@
 import { useState } from "react";
-import Modal from "./Modal";
+import Modal from "./Modal.js";
+import type { User } from "../types/user";
 
-function CreateUser({ onCreate, onClose }) {
+// type NewUser = Omit<User, "id">; //for getting id from backend/server
+
+/* type CreateUserProps = {
+  onCreate: (user: User) => void;
+  onClose: () => void;
+  users: User[];
+}; */
+
+function CreateUser({ onCreate, onClose }: /* CreateUserProps */{ onCreate: (user: User) => void; onClose: () => void }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (!name || !email || !phone) {
@@ -15,13 +24,15 @@ function CreateUser({ onCreate, onClose }) {
       return;
     }
 
-    const newUser = {
+    const newUser: User = {
       id: crypto.randomUUID(),
+      no: Date.now(),
       name,
       email,
       phone,
       username: name.toLowerCase().replace(/\s/g, ""),
       address,
+      website: "",
       active: true,
       role: "user",
     };

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Modal from "./Modal";
-import ConfirmAction from "./ConfirmAction";
-import LoadingOverlay from "./LoadingOverlay";
+import Modal from "./Modal.js";
+import ConfirmAction from "./ConfirmAction.js";
+import LoadingOverlay from "./LoadingOverlay.js";
 
 function EditUser({ user, onUpdate, onClose }) {
   const [name, setName] = useState(user.name);

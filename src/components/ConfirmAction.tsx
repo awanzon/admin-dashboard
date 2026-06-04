@@ -1,3 +1,12 @@
+interface ConfirmActionProps {
+  title?: string;
+  description?: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+  confirmText?: string;
+  danger?: boolean;
+}
+
 function ConfirmAction({
   title = "Are you sure?",
   description,
@@ -5,7 +14,7 @@ function ConfirmAction({
   onCancel,
   confirmText = "Confirm",
   danger = false,
-}) {
+}: ConfirmActionProps) {
   return (
     <div className="space-y-4">
       <h3 className="text-lg font-semibold text-white">

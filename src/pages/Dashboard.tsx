@@ -1,12 +1,13 @@
-import { useUsers } from "../hooks/useUsers.jsx";
-import UserList from "../components/UserList.jsx";
-import UserDetail from "../components/UserDetail.jsx";
-import Loading from "../components/Loading.jsx";
-import EmptyState from "../components/EmptyState.jsx";
-import ErrorMessage from "../components/ErrorMessage.jsx";
-import CreateUser from "../components/CreateUserModal";
-import EditUser from "../components/EditUserModal.jsx";
-import DeleteUserModal from "../components/DeleteUserModal.jsx";
+import { useUsers } from "../hooks/useUsers.js";
+import UserList from "../components/UserList.js";
+import UserDetail from "../components/UserDetail.js";
+import Loading from "../components/Loading.js";
+import EmptyState from "../components/EmptyState.js";
+import ErrorMessage from "../components/ErrorMessage.js";
+import CreateUser from "../components/CreateUserModal.js";
+import EditUser from "../components/EditUserModal.js";
+import DeleteUserModal from "../components/DeleteUserModal.js";
+import type { FilterType } from "../utils/filter";
 
 function Dashboard() {
   const {
@@ -35,7 +36,6 @@ function Dashboard() {
     closeEdit,
     handleUpdateUser,
   } = useUsers();
-  
 
   if (loading) {
     return <Loading text="Please wait..." />;
@@ -80,11 +80,11 @@ function Dashboard() {
           <select
             value={filterType}
             className="bg-zinc-900 text-white border border-zinc-700 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-            onChange={(e) => setFilterType(e.target.value)}
+            onChange={(e) => setFilterType(e.target.value as FilterType)}
           >
             <option value="all">All Users</option>
             <option value="idSmall">User ID ≤ 5</option>
-            <option value="startsWithA">Name starts with A</option>
+            <option value="startWithA">Name start with A</option>
           </select>
 
           <button
@@ -112,16 +112,15 @@ function Dashboard() {
         {selectedUser && (
           <UserDetail
             user={selectedUser}
-            onClose={closeSelectedUser}
+            onClose={async () => closeSelectedUser()}
             deleteUser={openDeleteModal}
             editUser={openEdit}
           />
         )}
         {userToDelete && (
           <DeleteUserModal
-            user={userToDelete}
-            isLoading={isDeleting}
-            onDelete={handleDeleteUser}
+            user={{ ...userToDelete, id: String(userToDelete.id) }}
+            onDelete={(id: string) => handleDeleteUser(id)}
             onClose={closeDeleteModal}
           />
         )}

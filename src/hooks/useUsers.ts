@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
 // import { getUsers } from "../data/api/users"; //external data(API)
 import mockUsers from "../data/mocks/mockUsers"; //internal data(mock)
+import type { User } from "../types/user";
+import type { FilterType } from "../utils/filter";
 
 function useUsers() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [search, setSearch] = useState("");
-  const [filterType, setFilterType] = useState("all");
-  const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [editingUser, setEditingUser] = useState(null);
-  const [isDeleting, setIsDeleting] = useState(false); //saklar on/off
-  const [userToDelete, setUserToDelete] = useState(null);
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [search, setSearch] = useState<string>("");
+  const [filterType, setFilterType] = useState<FilterType>("all");
+  const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
+  const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [isUpdating, setIsUpdating] = useState<boolean>(false); //saklar on/off
+  const [userToDelete, setUserToDelete] = useState<User | null>(null);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false); //saklar on/off
 
   //Fetch users when dashboard is mounted
   useEffect(() => {
@@ -34,21 +37,22 @@ function useUsers() {
 
   //Filtering users by search value
   const searchValue = search.toLowerCase();
-  const filteredUsers = users.filter((user) => {
+  const isSmallId = filterType === "idSmall";
+  const isStartWithA = filterType === "startWithA";
+  const filteredUsers: User[] = users.filter((user) => {
     const matchesSearch =
       user.name.toLowerCase().includes(searchValue) ||
       user.email.toLowerCase().includes(searchValue) ||
       user.phone.includes(searchValue);
 
     if (!matchesSearch) return false;
-    if (filterType === "idSmall") return user.id <= 5;
-    if (filterType === "startsWithA")
-      return user.name.toLowerCase().startsWith("a");
+    if (isSmallId) return user.no <= 5;
+    if (isStartWithA) return user.name.toLowerCase().startsWith("a");
     return true;
   });
 
   //view selected user
-  function openSelectedUser(user) {
+  function openSelectedUser(user: User) {
     setSelectedUser(user);
   }
 
@@ -56,7 +60,7 @@ function useUsers() {
     setSelectedUser(null);
   }
 
-  //add new user
+  //Create new user
   function openCreate() {
     setIsCreateOpen(true);
   }
@@ -65,28 +69,44 @@ function useUsers() {
     setIsCreateOpen(false);
   }
 
-  function handleCreateUser(newUser) {
+  function handleCreateUser(newUser: User) {
     setUsers((prevUsers) => [newUser, ...prevUsers]);
   }
 
-  //delete user
-  function openDeleteModal(user) {
+  //Delete user
+  function openDeleteModal(user: User) {
     setUserToDelete(user);
-    setSelectedUser(false);
+    setSelectedUser(null);
   }
 
   function closeDeleteModal() {
     setUserToDelete(null);
   }
 
-  async function handleDeleteUser(userId) {
+  async function handleDeleteUser(userId: string) {
+    console.log("DELETE ID:", userId);
     try {
       setIsDeleting(true);
 
       // simulate API delay
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      setUsers((prev) => prev.filter((u) => u.id !== userId));
+      // setUsers((prev) => prev.filter((u) => u.id !== userId));
+      setUsers((prev) => {
+        console.log(
+          "BEFORE:",
+          prev.map((u) => u.id),
+        );
+
+        const filtered = prev.filter((u) => u.id !== userId);
+
+        console.log(
+          "AFTER:",
+          filtered.map((u) => u.id),
+        );
+
+        return filtered;
+      });
     } catch (err) {
       setError("Failed to delete user");
     } finally {
@@ -94,8 +114,8 @@ function useUsers() {
     }
   }
 
-  //Update user handler
-  function openEdit(user) {
+  //Update user
+  function openEdit(user: User) {
     setEditingUser(user);
     setSelectedUser(null);
   }
@@ -103,10 +123,10 @@ function useUsers() {
     setEditingUser(null);
   }
 
-  async function handleUpdateUser(updatedUser) {
-    setEditingUser(true);
-
+  async function handleUpdateUser(updatedUser: User) {
     try {
+      setIsUpdating(true);
+
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
           user.id === updatedUser.id ? updatedUser : user,
@@ -115,7 +135,8 @@ function useUsers() {
     } catch (err) {
       setError("Failed to Update the Data");
     } finally {
-      setEditingUser(false);
+      setEditingUser(null);
+      setIsUpdating(false);
     }
   }
 
@@ -141,6 +162,7 @@ function useUsers() {
     closeDeleteModal,
     handleDeleteUser,
     editingUser,
+    isUpdating,
     openEdit,
     closeEdit,
     handleUpdateUser,
@@ -148,7 +170,3 @@ function useUsers() {
 }
 
 export { useUsers };
-
-// function handleDeleteUser(userId) {
-//     const confirmed = window.confirm("Are you sure to delete this user?");
-//     if (!confirmed) return;

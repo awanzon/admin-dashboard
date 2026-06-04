@@ -1,6 +1,17 @@
-import Modal from "./Modal";
+import type { User } from "../types/user";
+import Modal from "./Modal.js";
 
-function UserDetail({ user, onClose, deleteUser, editUser }) {
+function UserDetail({
+  user,
+  onClose,
+  deleteUser,
+  editUser,
+}: {
+  user: User;
+  onClose: () => void;
+  deleteUser: (user: User) => void;
+  editUser: (user: User) => void;
+}) {
   if (!user) return null;
   const ad = user.address;
 
@@ -45,17 +56,17 @@ function UserDetail({ user, onClose, deleteUser, editUser }) {
                 <span className="text-zinc-400">Role:</span> {user.role}
               </p>
             )}
-            {user.active && (
+            {user.active !== undefined && (
               <p>
                 <span className="text-zinc-400">Status:</span>{" "}
-                {user.active !== false ? "Active" : "Nonactive"}
+                {user.active ? "Active" : "Nonactive"}
               </p>
             )}
 
             {ad && (
               <p>
-                <span className="text-zinc-400">Address:</span>{" "}
-                {ad?.street || "-"} {ad?.city || ""} {ad?.zipcode || ""} {ad}
+                <span className="text-zinc-400">Address:</span>{" "} {ad}
+                {/* {ad.street || "-"} {ad.city || ""} {ad.zipcode || ""} */}
               </p>
             )}
           </div>

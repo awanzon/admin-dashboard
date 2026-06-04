@@ -51,20 +51,21 @@ The goal of this project is to demonstrate my readiness as a **junior frontend d
 
 🚧 In Progress
 
--
+- Migration to Typescript
 
 
-
+Problem need to fix
+- When I add new user then i delete it, it won't be dissapear.
 ----------
 
-### 📝 Planned
+📝 Planned
 
 -
 
-  * File-based routing
-  * SEO improvements
-  * Server-side rendering (SSR)
-  * Production-ready setup
+* File-based routing
+* SEO improvements
+* Server-side rendering (SSR)
+* Production-ready setup
 * Pagination
 * Retry button on API errors
 * Accessibility improvements

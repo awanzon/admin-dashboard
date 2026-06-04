@@ -1,12 +1,22 @@
 import { useState } from "react";
-import Modal from "./Modal";
-import ConfirmAction from "./ConfirmAction";
-import LoadingOverlay from "./LoadingOverlay";
+import Modal from "./Modal.js";
+import ConfirmAction from "./ConfirmAction.js";
+import LoadingOverlay from "./LoadingOverlay.js";
 
-function DeleteUserModal({ user, onDelete, onClose }) {
-  const [isLoading, setIsLoading] = useState(false);
+function DeleteUserModal({
+  user,
+  onDelete,
+  onClose,
+}: {
+  user: { id: string; name: string };
+  onDelete: (id: string) => Promise<void>;
+  onClose: () => void;
+}) {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function handleConfirmDelete() {
+    console.log("MODAL USER ID:", user.id);
+    
     setIsLoading(true);
     await onDelete(user.id); // async delete
     setIsLoading(false);
