@@ -32,8 +32,8 @@ The goal of this project is to demonstrate my readiness as a **junior frontend d
 
 > Data & State Management
 
-* **Mock API (`MockUsers.js`)** – Simulates backend user data
-* **Custom Hook (`useUsers.jsx`)** – Centralized logic for data fetching, CRUD, loading, and error states
+* **Mock API (`MockUsers.ts`)** – Simulates backend user data
+* **Custom Hook (`useUsers.ts`)** – Centralized logic for data fetching, CRUD, loading, and error states
 * **Axios API Layer** – Abstracted API calls for better separation of concerns(used for real API)
 
 > UI & UX
@@ -51,11 +51,11 @@ The goal of this project is to demonstrate my readiness as a **junior frontend d
 
 🚧 In Progress
 
-- Migration to Typescript
+- Migration to Typescript // Done
 
 
 Problem need to fix
-- When I add new user then i delete it, it won't be dissapear.
+
 ----------
 
 📝 Planned
@@ -81,6 +81,7 @@ Problem need to fix
 * Axios (API handling)
 * CSS / Tailwind CSS
 * Git & GitHub (conventional commits)
+* Typescript
 
 ---
 
@@ -90,29 +91,29 @@ Problem need to fix
 src/
 |--data/
 │   -- api/
-│      > users.js              # Axios API layer
+│      > users.ts              # Axios API layer
 │   -- mocks/
-│      > MockUsers.js          # Mock user data
+│      > MockUsers.ts          # Mock user data
 │
 |--components/
-│   > UserList.jsx             # Loop and render users
-│   > UserCard.jsx             # Individual user display
-│   > UserDetail.jsx           # User detail modal
-│   > CreateUserModal.jsx      # Create user modal
-│   > DeleteUserModal.jsx      # Delete Confirmation UI
-│   > EditUserModal.jsx        # Update user modal
-│   > Modal.jsx                # Reusable Modal Confirmation UI
-│   > Loading.jsx              # Reusable loading UI
-│   > LoadingOverlay.jsx       # loading UI after Confirmation
-│   > ErrorMessage.jsx         # Error UI
-│   > EmptyState.jsx           # Empty state UI
-│   > ConfirmAction.jsx        # Reusable Confirmation UI
+│   > UserList.tsx             # Loop and render users
+│   > UserCard.tsx             # Individual user display
+│   > UserDetail.tsx           # User detail modal
+│   > CreateUserModal.tsx      # Create user modal
+│   > DeleteUserModal.tsx      # Delete Confirmation UI
+│   > EditUserModal.tsx        # Update user modal
+│   > Modal.tsx                # Reusable Modal Confirmation UI
+│   > Loading.tsx              # Reusable loading UI
+│   > LoadingOverlay.tsx       # loading UI after Confirmation
+│   > ErrorMessage.tsx         # Error UI
+│   > EmptyState.tsx           # Empty state UI
+│   > ConfirmAction.tsx        # Reusable Confirmation UI
 │
 |--hooks/
-│   > useUsers.jsx             # Centralized user logic
+│   > useUsers.tsx             # Centralized user logic
 │
 |--pages/
-│   > Dashboard.jsx            # Main dashboard UI
+│   > Dashboard.tsx            # Main dashboard UI
 ```
 
 ---

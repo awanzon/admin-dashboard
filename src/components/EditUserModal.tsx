@@ -2,8 +2,14 @@ import { useState } from "react";
 import Modal from "./Modal.js";
 import ConfirmAction from "./ConfirmAction.js";
 import LoadingOverlay from "./LoadingOverlay.js";
+import type { User } from "../types/user.js";
 
-function EditUser({ user, onUpdate, onClose }) {
+function EditUser({
+  user, onUpdate, onClose }: {
+    user: User;
+    onUpdate: (user: User) => Promise<void>;
+    onClose: () => void;
+  }) {
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
   const [phone, setPhone] = useState(user.phone);
@@ -11,7 +17,7 @@ function EditUser({ user, onUpdate, onClose }) {
   const [showConfirm, setShowConfirm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setShowConfirm(true);
   }
