@@ -32,9 +32,9 @@ The goal of this project is to demonstrate my readiness as a **junior frontend d
 
 > Data & State Management
 
-* **Mock API (`MockUsers.js`)** – Simulates backend user data
-* **Custom Hook (`useUsers.jsx`)** – Centralized logic for data fetching, CRUD, loading, and error states
-* **Axios API Layer** – Abstracted API calls for better separation of concerns
+* **Mock API (`MockUsers.ts`)** – Simulates backend user data
+* **Custom Hook (`useUsers.ts`)** – Centralized logic for data fetching, CRUD, loading, and error states
+* **Axios API Layer** – Abstracted API calls for better separation of concerns(used for real API)
 
 > UI & UX
 
@@ -42,25 +42,30 @@ The goal of this project is to demonstrate my readiness as a **junior frontend d
 * **User Detail Modal** – View detailed user information
 * **Search & Filter** – Search users by name, phone, or email
 * **Loading State** – Reusable loading component
+* **Loading Overlay** – Reusable for after Confirmation Changing data
 * **Error Handling** – Graceful error UI for failed requests
 * **Empty State** – Clear feedback when no data matches the search
+* **Tailwind CSS Integration** – Refactoring UI styles using Tailwind for scalability and consistency
 
 ----------
 
 🚧 In Progress
 
-* **Tailwind CSS Integration** – Refactoring UI styles using Tailwind for scalability and consistency
+- Migration to Typescript // Done
+
+
+Problem need to fix
 
 ----------
 
-### 📝 Planned
+📝 Planned
 
-* **Next.js Migration**
+-
 
-  * File-based routing
-  * SEO improvements
-  * Server-side rendering (SSR)
-  * Production-ready setup
+* File-based routing
+* SEO improvements
+* Server-side rendering (SSR)
+* Production-ready setup
 * Pagination
 * Retry button on API errors
 * Accessibility improvements
@@ -76,6 +81,7 @@ The goal of this project is to demonstrate my readiness as a **junior frontend d
 * Axios (API handling)
 * CSS / Tailwind CSS
 * Git & GitHub (conventional commits)
+* Typescript
 
 ---
 
@@ -85,25 +91,29 @@ The goal of this project is to demonstrate my readiness as a **junior frontend d
 src/
 |--data/
 │   -- api/
-│      > users.js              # Axios API layer
+│      > users.ts              # Axios API layer
 │   -- mocks/
-│      > MockUsers.js          # Mock user data
+│      > MockUsers.ts          # Mock user data
 │
 |--components/
-│   > UserList.jsx             # Loop and render users
-│   > UserCard.jsx             # Individual user display
-│   > UserDetail.jsx           # User detail modal
-│   > CreateUserModal.jsx      # Create user modal
-│   > EditUserModal.jsx        # Update user modal
-│   > Loading.jsx              # Reusable loading UI
-│   > ErrorMessage.jsx         # Error UI
-│   > EmptyState.jsx           # Empty state UI
+│   > UserList.tsx             # Loop and render users
+│   > UserCard.tsx             # Individual user display
+│   > UserDetail.tsx           # User detail modal
+│   > CreateUserModal.tsx      # Create user modal
+│   > DeleteUserModal.tsx      # Delete Confirmation UI
+│   > EditUserModal.tsx        # Update user modal
+│   > Modal.tsx                # Reusable Modal Confirmation UI
+│   > Loading.tsx              # Reusable loading UI
+│   > LoadingOverlay.tsx       # loading UI after Confirmation
+│   > ErrorMessage.tsx         # Error UI
+│   > EmptyState.tsx           # Empty state UI
+│   > ConfirmAction.tsx        # Reusable Confirmation UI
 │
 |--hooks/
-│   > useUsers.jsx             # Centralized user logic
+│   > useUsers.tsx             # Centralized user logic
 │
 |--pages/
-│   > Dashboard.jsx            # Main dashboard UI
+│   > Dashboard.tsx            # Main dashboard UI
 ```
 
 ---
