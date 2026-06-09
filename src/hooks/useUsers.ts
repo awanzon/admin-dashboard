@@ -11,11 +11,19 @@ function useUsers() {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [search, setSearch] = useState<string>("");
   const [filterType, setFilterType] = useState<FilterType>("all");
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, filterType]);
+
   const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [isUpdating, setIsUpdating] = useState<boolean>(false); //saklar on/off
   const [userToDelete, setUserToDelete] = useState<User | null>(null);
   const [isDeleting, setIsDeleting] = useState<boolean>(false); //saklar on/off
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 5;
 
   //Fetch users when dashboard is mounted
   useEffect(() => {
@@ -50,6 +58,15 @@ function useUsers() {
     if (isStartWithA) return user.name.toLowerCase().startsWith("a");
     return true;
   });
+
+  //Count total pages
+  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
+
+  //Slice users by the page
+  const paginatedUsers = filteredUsers.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   //view selected user
   function openSelectedUser(user: User) {
@@ -141,7 +158,7 @@ function useUsers() {
   }
 
   return {
-    users: filteredUsers,
+    users: paginatedUsers,
     loading,
     error,
     search,
@@ -166,6 +183,9 @@ function useUsers() {
     openEdit,
     closeEdit,
     handleUpdateUser,
+    currentPage,
+    totalPages,
+    setCurrentPage,
   };
 }
 

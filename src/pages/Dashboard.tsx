@@ -8,6 +8,7 @@ import CreateUser from "../components/CreateUserModal.js";
 import EditUser from "../components/EditUserModal.js";
 import DeleteUserModal from "../components/DeleteUserModal.js";
 import type { FilterType } from "../utils/filter";
+import Pagination from "../components/Pagination.js";
 
 function Dashboard() {
   const {
@@ -35,6 +36,9 @@ function Dashboard() {
     openEdit,
     closeEdit,
     handleUpdateUser,
+    currentPage,
+    totalPages,
+    setCurrentPage,
   } = useUsers();
 
   if (loading) {
@@ -108,6 +112,12 @@ function Dashboard() {
             <UserList users={filteredUsers} viewDetail={openSelectedUser} />
           </div>
         )}
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
 
         {selectedUser && (
           <UserDetail
