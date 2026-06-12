@@ -11,19 +11,18 @@ function useUsers() {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [search, setSearch] = useState<string>("");
   const [filterType, setFilterType] = useState<FilterType>("all");
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [search, filterType]);
-
   const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [isUpdating, setIsUpdating] = useState<boolean>(false); //saklar on/off
   const [userToDelete, setUserToDelete] = useState<User | null>(null);
   const [isDeleting, setIsDeleting] = useState<boolean>(false); //saklar on/off
-
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
+
+  //Pagination Number
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, filterType]);
 
   //Fetch users when dashboard is mounted
   useEffect(() => {

@@ -9,8 +9,12 @@ import EditUser from "../components/EditUserModal.js";
 import DeleteUserModal from "../components/DeleteUserModal.js";
 import type { FilterType } from "../utils/filter";
 import Pagination from "../components/Pagination.js";
+import { useToast } from "../hooks/useToast.js";
+import ToastContainer from "../components/ToastContainer.js";
+import type { User } from "../types/user.js";
 
 function Dashboard() {
+  const { toasts, showToast, removeToast } = useToast();
   const {
     users: filteredUsers,
     loading,
@@ -41,6 +45,20 @@ function Dashboard() {
     setCurrentPage,
   } = useUsers();
 
+  function handleCreate(user: User) {
+    handleCreateUser(user);
+    showToast("User created successfully!", "success");
+  }
+
+  async function handleDelete(id: string) {
+    await handleDeleteUser(id);
+    showToast("User deleted successfully!", "success");
+  }
+
+  async function handleUpdate(user: User) {
+    await handleUpdateUser(user);
+    showToast("User Updated successfully!", "success");
+  }
   if (loading) {
     return <Loading text="Please wait..." />;
   }
@@ -99,7 +117,7 @@ function Dashboard() {
           </button>
 
           {isCreateOpen && (
-            <CreateUser onCreate={handleCreateUser} onClose={closeCreate} />
+            <CreateUser onCreate={handleCreate} onClose={closeCreate} />
           )}
         </div>
         {filteredUsers.length === 0 ? (
@@ -130,7 +148,7 @@ function Dashboard() {
         {userToDelete && (
           <DeleteUserModal
             user={{ ...userToDelete, id: String(userToDelete.id) }}
-            onDelete={(id: string) => handleDeleteUser(id)}
+            onDelete={(id: string) => handleDelete(id)}
             onClose={closeDeleteModal}
           />
         )}
@@ -138,10 +156,12 @@ function Dashboard() {
         {editingUser && (
           <EditUser
             user={editingUser}
-            onUpdate={handleUpdateUser}
+            onUpdate={handleUpdate}
             onClose={closeEdit}
           />
         )}
+        <ToastContainer toasts={toasts} onRemove={removeToast}/>
+        
       </div>
     </div>
   );

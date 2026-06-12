@@ -17,7 +17,7 @@ function Pagination({
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="px-3 py-1 rounded bg-zinc-700 text-white hover:bg-zinc-600 disabled:opacity-40 cursor-not-allowed"
+        className="px-3 py-1 rounded bg-zinc-700 text-white hover:bg-zinc-600 disabled:opacity-40 disabled:cursor-not-allowed"
       >
         Prev
       </button>
@@ -27,7 +27,7 @@ function Pagination({
         <button
           key={page}
           onClick={() => onPageChange(page)}
-          className={`px-3 py-1 rounded front-semibold ${
+          className={`px-3 py-1 rounded font-semibold ${
             page === currentPage
               ? "bg-red-600 text-white"
               : "bg-zinc-700 text-white hover:bg-zinc-600"
@@ -41,7 +41,7 @@ function Pagination({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="px-3 py-1 rounded bg-zinc-700 text-white hover:bg-zinc-600 disabled:opacity-40 cursor-not-allowed"
+        className="px-3 py-1 rounded bg-zinc-700 text-white hover:bg-zinc-600 disabled:opacity-40 disabled:cursor-not-allowed"
       >
         Next
       </button>
