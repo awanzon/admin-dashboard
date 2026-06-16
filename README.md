@@ -29,6 +29,7 @@ The goal of this project is to demonstrate my readiness as a **junior frontend d
 * **Read User** – Display user list and detailed user view (modal)
 * **Update User** – Edit user information via modal
 * **Delete User** – Delete user with confirmation dialog
+* **Bulk Delete** – Bulk Delete with Checkbox selection
 
 > Data & State Management
 
@@ -45,6 +46,8 @@ The goal of this project is to demonstrate my readiness as a **junior frontend d
 * **Loading Overlay** – Reusable for after Confirmation Changing data
 * **Error Handling** – Graceful error UI for failed requests
 * **Empty State** – Clear feedback when no data matches the search
+* **Toast Notification** – Toast Notifications CRUD
+* **Pagination** – Pagination Userlist
 * **Tailwind CSS Integration** – Refactoring UI styles using Tailwind for scalability and consistency
 
 ----------
@@ -52,6 +55,7 @@ The goal of this project is to demonstrate my readiness as a **junior frontend d
 🚧 In Progress
 
 - Migration to Typescript // Done
+- 
 
 
 Problem need to fix
@@ -66,7 +70,7 @@ Problem need to fix
 * SEO improvements
 * Server-side rendering (SSR)
 * Production-ready setup
-* Pagination
+* Pagination ✅
 * Retry button on API errors
 * Accessibility improvements
 * Basic unit testing

@@ -1,22 +1,17 @@
 import { useState } from "react";
 import Modal from "./Modal.js";
 import type { User } from "../types/user";
-
-// type NewUser = Omit<User, "id">; //for getting id from backend/server
-
-/* type CreateUserProps = {
-  onCreate: (user: User) => void;
-  onClose: () => void;
-  users: User[];
-}; */
+import { useUsers } from "../hooks/useUsers.js";
+import LoadingOverlay from "./LoadingOverlay.js";
 
 function CreateUser({ onCreate, onClose }: /* CreateUserProps */{ onCreate: (user: User) => void; onClose: () => void }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (!name || !email || !phone) {
@@ -24,6 +19,7 @@ function CreateUser({ onCreate, onClose }: /* CreateUserProps */{ onCreate: (use
       return;
     }
 
+    setLoading(true);
     const newUser: User = {
       id: crypto.randomUUID(),
       no: Date.now(),
@@ -37,13 +33,21 @@ function CreateUser({ onCreate, onClose }: /* CreateUserProps */{ onCreate: (use
       role: "user",
     };
 
-    onCreate(newUser);
-    onClose();
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await onCreate(newUser);
+    } catch (error) {
+      console.error("Update failed:",error);
+    } finally {
+      setLoading(false);
+      onClose();
+    }
   }
 
   return (
     <Modal onClose={onClose}>
       <div className="flex justify-end">
+        {loading && <LoadingOverlay text="Creating User..." />}
         <button
           onClick={onClose}
           className="mt-0 w-15 rounded-lg bg-zinc-600 py-1 font-semibold hover:bg-zinc-800"

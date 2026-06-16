@@ -8,8 +8,15 @@ import CreateUser from "../components/CreateUserModal.js";
 import EditUser from "../components/EditUserModal.js";
 import DeleteUserModal from "../components/DeleteUserModal.js";
 import type { FilterType } from "../utils/filter";
+import Pagination from "../components/Pagination.js";
+import { useToast } from "../hooks/useToast.js";
+import ToastContainer from "../components/ToastContainer.js";
+import type { User } from "../types/user.js";
+import BulkDeleteModal from "../components/BulkDeleteModal.js";
+import { useState } from "react";
 
 function Dashboard() {
+  const { toasts, showToast, removeToast } = useToast();
   const {
     users: filteredUsers,
     loading,
@@ -35,8 +42,37 @@ function Dashboard() {
     openEdit,
     closeEdit,
     handleUpdateUser,
+    currentPage,
+    totalPages,
+    setCurrentPage,
+    selectedIds,
+    toggleSelectedUser,
+    handleBulkDelete,
+    isBulkDeleteOpen,
+    setIsBulkDeleteOpen,
   } = useUsers();
 
+  function handleCreate(user: User) {
+    handleCreateUser(user);
+    showToast("User created successfully!", "success");
+  }
+
+  //Bulk Delete
+  async function handleBulkDeleteWithToast() {
+    await handleBulkDelete();
+    showToast(`${selectedIds.length} users deleted successfully!`, "success");
+    setIsBulkDeleteOpen(false);
+  }
+
+  async function handleDelete(id: string) {
+    await handleDeleteUser(id);
+    showToast("User deleted successfully!", "success");
+  }
+
+  async function handleUpdate(user: User) {
+    await handleUpdateUser(user);
+    showToast("User Updated successfully!", "success");
+  }
   if (loading) {
     return <Loading text="Please wait..." />;
   }
@@ -94,8 +130,19 @@ function Dashboard() {
             + Add User
           </button>
 
+          {selectedIds.length > 0 && (
+            <div className="max-w-5x1 mx-auto mb-3">
+              <button
+                onClick={() => setIsBulkDeleteOpen(true)}
+                className="bg-red-700 hover:bg-red-800 text-white font-semibold px-4 py-2 rounded-lg transition"
+              >
+                Delete Selected ({selectedIds.length})
+              </button>
+            </div>
+          )}
+
           {isCreateOpen && (
-            <CreateUser onCreate={handleCreateUser} onClose={closeCreate} />
+            <CreateUser onCreate={handleCreate} onClose={closeCreate} />
           )}
         </div>
         {filteredUsers.length === 0 ? (
@@ -105,9 +152,20 @@ function Dashboard() {
           />
         ) : (
           <div className="bg-neutral-900 rounded-xl p-4 shadow-lg border border-neutral-800">
-            <UserList users={filteredUsers} viewDetail={openSelectedUser} />
+            <UserList
+              users={filteredUsers}
+              viewDetail={openSelectedUser}
+              selectedIds={selectedIds}
+              onToggleSelect={toggleSelectedUser}
+            />
           </div>
         )}
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
 
         {selectedUser && (
           <UserDetail
@@ -120,7 +178,7 @@ function Dashboard() {
         {userToDelete && (
           <DeleteUserModal
             user={{ ...userToDelete, id: String(userToDelete.id) }}
-            onDelete={(id: string) => handleDeleteUser(id)}
+            onDelete={(id: string) => handleDelete(id)}
             onClose={closeDeleteModal}
           />
         )}
@@ -128,10 +186,19 @@ function Dashboard() {
         {editingUser && (
           <EditUser
             user={editingUser}
-            onUpdate={handleUpdateUser}
+            onUpdate={handleUpdate}
             onClose={closeEdit}
           />
         )}
+
+        {isBulkDeleteOpen && (
+          <BulkDeleteModal
+            count={selectedIds.length}
+            onDelete={handleBulkDeleteWithToast}
+            onClose={() => setIsBulkDeleteOpen(false)}
+          />
+        )}
+        <ToastContainer toasts={toasts} onRemove={removeToast} />
       </div>
     </div>
   );
