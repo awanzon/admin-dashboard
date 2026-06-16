@@ -18,6 +18,9 @@ function useUsers() {
   const [isDeleting, setIsDeleting] = useState<boolean>(false); //saklar on/off
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);//checkbox
+  const [isBulkDeleteOpen, setIsBulkDeleteOpen] = useState<boolean>(false);
+
 
   //Pagination Number
   useEffect(() => {
@@ -74,6 +77,22 @@ function useUsers() {
 
   function closeSelectedUser() {
     setSelectedUser(null);
+  }
+
+  //Bulk Delete (toogle user)
+  function toggleSelectedUser(id: string) {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+    );
+  }
+  function clearSelection() {
+    setSelectedIds([]);
+  }
+  //Delete all selected
+  async function handleBulkDelete() {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setUsers((prev) => prev.filter((u) => !selectedIds.includes(u.id)));
+    clearSelection();
   }
 
   //Create new user
@@ -185,6 +204,11 @@ function useUsers() {
     currentPage,
     totalPages,
     setCurrentPage,
+    selectedIds,
+    toggleSelectedUser,
+    handleBulkDelete,
+    isBulkDeleteOpen,
+    setIsBulkDeleteOpen,
   };
 }
 
