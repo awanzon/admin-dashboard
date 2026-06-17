@@ -50,6 +50,7 @@ function Dashboard() {
     handleBulkDelete,
     isBulkDeleteOpen,
     setIsBulkDeleteOpen,
+    toggleSelectedAll,
   } = useUsers();
 
   function handleCreate(user: User) {
@@ -157,6 +158,7 @@ function Dashboard() {
               viewDetail={openSelectedUser}
               selectedIds={selectedIds}
               onToggleSelect={toggleSelectedUser}
+              onToggleSelectedAll={toggleSelectedAll}
             />
           </div>
         )}

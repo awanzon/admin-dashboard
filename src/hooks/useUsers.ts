@@ -79,7 +79,7 @@ function useUsers() {
     setSelectedUser(null);
   }
 
-  //Bulk Delete (toogle user)
+  //Toogle selected box
   function toggleSelectedUser(id: string) {
     setSelectedIds((prev) =>
       prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
@@ -88,7 +88,16 @@ function useUsers() {
   function clearSelection() {
     setSelectedIds([]);
   }
-  //Delete all selected
+
+  function toggleSelectedAll() {
+    if (selectedIds.length === paginatedUsers.length) {
+      setSelectedIds([]); //check/uncheck all
+    } else {
+      setSelectedIds(paginatedUsers.map((u) => u.id)); //check all on this page
+    }
+  }
+
+  //Bulk Delete
   async function handleBulkDelete() {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setUsers((prev) => prev.filter((u) => !selectedIds.includes(u.id)));
@@ -209,6 +218,7 @@ function useUsers() {
     handleBulkDelete,
     isBulkDeleteOpen,
     setIsBulkDeleteOpen,
+    toggleSelectedAll,
   };
 }
 
