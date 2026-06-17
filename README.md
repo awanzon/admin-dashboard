@@ -48,6 +48,7 @@ The goal of this project is to demonstrate my readiness as a **junior frontend d
 * **Empty State** – Clear feedback when no data matches the search
 * **Toast Notification** – Toast Notifications CRUD
 * **Pagination** – Pagination Userlist
+* **Checkbox & Bulk Delete** – Selected Checkbox with Bulk Delete 
 * **Tailwind CSS Integration** – Refactoring UI styles using Tailwind for scalability and consistency
 
 ----------

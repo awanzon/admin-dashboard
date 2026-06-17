@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import mockUsers from "../data/mocks/mockUsers"; //internal data(mock)
 import type { User } from "../types/user";
 import type { FilterType } from "../utils/filter";
+import { useDebounce } from "./useDebounce";
 
 function useUsers() {
   const [users, setUsers] = useState<User[]>([]);
@@ -10,6 +11,7 @@ function useUsers() {
   const [error, setError] = useState<string | null>(null);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [search, setSearch] = useState<string>("");
+  const debouncedSearch = useDebounce(search, 500);
   const [filterType, setFilterType] = useState<FilterType>("all");
   const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
@@ -46,7 +48,7 @@ function useUsers() {
   }, []);
 
   //Filtering users by search value
-  const searchValue = search.toLowerCase();
+  const searchValue = debouncedSearch.toLowerCase();
   const isSmallId = filterType === "idSmall";
   const isStartWithA = filterType === "startWithA";
   const filteredUsers: User[] = users.filter((user) => {
@@ -89,6 +91,7 @@ function useUsers() {
     setSelectedIds([]);
   }
 
+  //Select All box
   function toggleSelectedAll() {
     if (selectedIds.length === paginatedUsers.length) {
       setSelectedIds([]); //check/uncheck all
