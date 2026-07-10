@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-// import { getUsers } from "../data/api/users"; //external data(API)
-import mockUsers from "../data/mocks/mockUsers"; //internal data(mock)
+import { getUsers } from "../data/api/users"; //external data(API)
+// import mockUsers from "../data/mocks/mockUsers"; //internal data(mock)
 import type { User } from "../types/user";
 import type { FilterType } from "../utils/filter";
 import { useDebounce } from "./useDebounce";
@@ -20,9 +20,8 @@ function useUsers() {
   const [isDeleting, setIsDeleting] = useState<boolean>(false); //saklar on/off
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);//checkbox
+  const [selectedIds, setSelectedIds] = useState<string[]>([]); //checkbox
   const [isBulkDeleteOpen, setIsBulkDeleteOpen] = useState<boolean>(false);
-
 
   //Pagination Number
   useEffect(() => {
@@ -33,8 +32,21 @@ function useUsers() {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        // setUsers(await getUsers()); //external data(API)
-        setUsers(mockUsers); //internal data(mock)
+        const data = await getUsers();
+        const mapped = data.map((u: any, index: number) => ({
+          id: String(u.id),
+          no: index + 1,
+          name: u.name,
+          username: u.username,
+          email: u.email,
+          phone: u.phone,
+          address: u.address?.street ?? "",
+          website: u.website ?? "",
+          role: "user",
+          active: true,
+        }));
+        // setUsers(mockUsers); //internal data(mock)
+        setUsers(mapped);
         setError(null);
       } catch (error) {
         console.error(error);
@@ -69,7 +81,7 @@ function useUsers() {
   //Slice users by the page
   const paginatedUsers = filteredUsers.slice(
     (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+    currentPage * itemsPerPage,
   );
 
   //view selected user
@@ -84,7 +96,7 @@ function useUsers() {
   //Toogle selected box
   function toggleSelectedUser(id: string) {
     setSelectedIds((prev) =>
-      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id],
     );
   }
   function clearSelection() {

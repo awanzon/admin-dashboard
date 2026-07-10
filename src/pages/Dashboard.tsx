@@ -148,7 +148,7 @@ function Dashboard() {
         </div>
         {filteredUsers.length === 0 ? (
           <EmptyState
-            title="No users match your search"
+            title="No data found"
             description="Try changing your search or filter criteria."
           />
         ) : (
