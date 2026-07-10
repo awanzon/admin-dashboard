@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Modal from "./Modal.js";
 import type { User } from "../types/user";
-import { useUsers } from "../hooks/useUsers.js";
 import LoadingOverlay from "./LoadingOverlay.js";
 
 function CreateUser({ onCreate, onClose }: /* CreateUserProps */{ onCreate: (user: User) => void; onClose: () => void }) {

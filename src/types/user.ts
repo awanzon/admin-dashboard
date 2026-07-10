@@ -1,3 +1,10 @@
+export interface Address {
+  street: string;
+  suite: string;
+  city: string;
+  zipcode: string;
+}
+
 export interface User {
   id: string;
   no: number;
@@ -5,12 +12,7 @@ export interface User {
   username: string;
   email: string;
   phone: string;
-  //
-  address: string;
-  // street: string; 
-  // city: string; 
-  // zipcode: string;
-  //
+  address: Address;
   website?: string;
   role: string;
   active: boolean;

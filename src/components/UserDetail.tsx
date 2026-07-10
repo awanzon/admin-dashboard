@@ -64,10 +64,12 @@ function UserDetail({
             )}
 
             {ad && (
-              <p>
-                <span className="text-zinc-400">Address:</span>{" "} {ad}
-                {/* {ad.street || "-"} {ad.city || ""} {ad.zipcode || ""} */}
-              </p>
+              <div>
+                <span className="text-zinc-400">Address:</span>
+                <p className="ml-2">{ad.street}</p>
+                <p className="ml-2">{ad.suite}</p>
+                <p className="ml-2">{ad.city}, {ad.zipcode}</p>
+              </div>
             )}
           </div>
 

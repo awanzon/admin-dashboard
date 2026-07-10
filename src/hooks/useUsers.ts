@@ -40,7 +40,12 @@ function useUsers() {
           username: u.username,
           email: u.email,
           phone: u.phone,
-          address: u.address?.street ?? "",
+          address: {
+            street: u.address?.street ?? "",
+            suite: u.address?.suite ?? "",
+            city: u.address?.city ?? "",
+            zipcode: u.address?.zipcode ?? "",
+          },
           website: u.website ?? "",
           role: "user",
           active: true,

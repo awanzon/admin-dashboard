@@ -11,7 +11,24 @@ const api = axios.create({
 export async function getUsers(): Promise<User[]> {
   try {
     const response = await api.get("/users");
-    return response.data as User[];
+
+    return response.data.map((u: any, index: number) => ({
+      id: String(u.id),
+      no: index + 1,
+      name: u.name,
+      username: u.username,
+      email: u.email,
+      phone: u.phone,
+      address: {
+        street: u.address?.street ?? "",
+        suite: u.address?.suite ?? "",
+        city: u.address?.city ?? "",
+        zipcode: u.address?.zipcode ?? "",
+      },
+      website: u.website ?? "",
+      role: "user",
+      active: true,
+    }));
   } catch (error) {
     console.error("API Error - getUsers:", error);
     throw error;
